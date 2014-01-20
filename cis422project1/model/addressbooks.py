@@ -6,10 +6,10 @@ import pickle
 class addressbooks:
     """docstring for addressbooks"""
     def __init__(self):
-        self.addressBooks = []
+        self.addressBooksList = []
 
     def addAddressBook(self, addrBook):
-        self.addressBooks.append(addrBook)
+        self.addressBooksList.append(addrBook)
     
     """Save: Function for saving an addressbooks instance.
     The arguments are a file name, and an overwrite flag. If no flag is passed 
