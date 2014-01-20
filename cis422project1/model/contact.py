@@ -10,6 +10,10 @@ class contact:
         self.emails = []
         self.phoneNumbers = []
 
+    def __eq__(self, other):
+        return (self.fname == other.fname) and (self.lname == other.lname) and (self.addresses)
+
+
     def addAddresses(self, addr):
         self.addresses.append(addr)
 
