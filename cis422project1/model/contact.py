@@ -10,6 +10,12 @@ class contact:
         self.emails = []
         self.phoneNumbers = []
 
+    def __eq__(self, other):
+        return (self.fname == other.fname) and (self.lname == other.lname) \
+            and (self.addresses == other.addresses) and (self.emails == other.emails) \
+            and (self.phoneNumbers)
+
+
     def addAddresses(self, addr):
         self.addresses.append(addr)
 
@@ -18,3 +24,25 @@ class contact:
 
     def addPhoneNumber(self, phoneNumber):
         self.phoneNumbers.append(phoneNumber)
+
+    def removeAddress(self, addr):
+        try:
+            self.addresses.remove(addr)
+        except ValueError:
+            return -1
+
+    def removeEmail(self, email):
+        try:
+            self.emails.remove(email)
+        except ValueError:
+            return -1
+
+    def removePhoneNumber(self, phoneNumber):
+        try:
+            self.phoneNumbers.remove(phoneNumber)
+        except ValueError:
+            return -1
+
+
+
+
