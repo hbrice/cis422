@@ -18,3 +18,25 @@ class contact:
 
     def addPhoneNumber(self, phoneNumber):
         self.phoneNumbers.append(phoneNumber)
+
+    def removeAddress(self, addr):
+        try:
+            self.addresses.remove(addr)
+        except ValueError:
+            return -1
+
+    def removeEmail(self, email):
+        try:
+            self.emails.remove(email)
+        except ValueError:
+            return -1
+
+    def removePhoneNumber(self, phoneNumber):
+        try:
+            self.phoneNumbers.remove(phoneNumber)
+        except ValueError:
+            return -1
+
+
+
+
