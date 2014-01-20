@@ -15,7 +15,7 @@ class addressbooks:
     The arguments are a file name, and an overwrite flag. If no flag is passed 
     the default is to not overwrite that file if it exists."""
     def save(self, fileName, overwrite = False):
-        if  not os.path.exists(fileName) or overwrite:
+        if not os.path.exists(fileName) or overwrite:
             output = open(fileName, 'w+')
             pickle.dump(self, output)
             output.close()
