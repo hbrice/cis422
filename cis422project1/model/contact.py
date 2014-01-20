@@ -11,7 +11,9 @@ class contact:
         self.phoneNumbers = []
 
     def __eq__(self, other):
-        return (self.fname == other.fname) and (self.lname == other.lname) and (self.addresses)
+        return (self.fname == other.fname) and (self.lname == other.lname) \
+            and (self.addresses == other.addresses) and (self.emails == other.emails) \
+            and (self.phoneNumbers)
 
 
     def addAddresses(self, addr):
