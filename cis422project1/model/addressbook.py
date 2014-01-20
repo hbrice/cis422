@@ -11,3 +11,7 @@ class addressbook:
 
     def removeContact(self, contact):
         self.contacts.remove(contact)
+
+    def displayAllContacts(self):
+        for x in range(0, len(contacts))
+            print contacts[x].fname
