@@ -7,9 +7,9 @@
 def isValidInput(inputString):
     #DEFINITELY not good enough. It will work for now though.
     if inputSring:
-        return true
+        return True
     else:
-        return false
+        return False
 
 #given a file will output a list of maps
 def importParse(importFile):
@@ -23,6 +23,7 @@ def importParse(importFile):
             entryList.append(dict(zip(_FORMAT, line.split('\t'))))
         else:
             print "'", line, "' is invalid."
-    if !entryList:
+    if not entryList:
         print "Empty input"
+    print entryList
     return entryList
