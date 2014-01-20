@@ -8,3 +8,6 @@ class addressbook:
 
     def addContact(self, contact):
         self.contacts.append(contact)
+
+    def removeContact(self, contact):
+        self.contacts.remove(contact)
