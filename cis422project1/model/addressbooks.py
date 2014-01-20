@@ -6,10 +6,10 @@ import pickle
 class addressbooks:
     """docstring for addressbooks"""
     def __init__(self):
-        self.addressBooks = []
+        self.addressBooksList = []
 
     def addAddressBook(self, addrBook):
-        self.addressBooks.append(addrBook)
+        self.addressBooksList.append(addrBook)
     
     """Save: Function for saving an addressbooks instance.
     The arguments are a file name, and an overwrite flag. If no flag is passed 
@@ -21,5 +21,11 @@ class addressbooks:
             output.close()
         else:
             print "AddressBooks file already exists. Overwrite?"
-            
-            
+    
+    """Load: sets the addressBooksList of self to the unpickled's list."""
+    def load(self, fileName):
+        if os.path.exists(fileName):
+             input = open(fileName, 'rb')
+             data = pickle.load(fileName)
+             if type(data) is addressBooks:
+             	self.addressBooksList = data.addressBooksList
