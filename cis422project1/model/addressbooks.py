@@ -21,5 +21,11 @@ class addressbooks:
             output.close()
         else:
             print "AddressBooks file already exists. Overwrite?"
-            
-            
+    
+    """Load: sets the addressBooksList of self to the unpickled's list."""
+    def load(self, fileName):
+        if os.path.exists(fileName):
+             input = open(fileName, 'rb')
+             data = pickle.load(fileName)
+             if type(data) is addressBooks:
+             	self.addressBooksList = data.addressBooksList
