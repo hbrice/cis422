@@ -13,5 +13,9 @@ class addressbook:
         self.contacts.remove(contact)
 
     def displayAllContacts(self):
-        for x in range(0, len(contacts))
-            print contacts[x].fname
+        for x in range(0, len(self.contacts))
+            print self.contacts[x].fname
+            print self.contacts[x].lname
+            print self.contacts[x].addressList
+            print self.contacts[x].emailList
+            print self.contacts[x].phoneNumberList
