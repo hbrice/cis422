@@ -28,10 +28,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="address.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="address.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/address.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="30" selection-start="593" selection-end="593" vertical-scroll-proportion="0.26548672" vertical-offset="0" max-vertical-offset="904">
+            <state line="15" column="30" selection-start="593" selection-end="593" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="352">
               <folding />
             </state>
           </provider>
@@ -41,10 +41,7 @@
         <entry file="file://$PROJECT_DIR$/model/email.py">
           <provider selected="true" editor-type-id="text-editor">
             <state line="9" column="80" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
-              <folding>
-                <marker date="1390261252000" expanded="true" signature="35:278" placeholder="..." />
-                <marker date="1390261252000" expanded="true" signature="197:278" placeholder="..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -53,10 +50,7 @@
         <entry file="file://$PROJECT_DIR$/model/phoneNumber.py">
           <provider selected="true" editor-type-id="text-editor">
             <state line="10" column="0" selection-start="300" selection-end="300" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="256">
-              <folding>
-                <marker date="1390261348000" expanded="true" signature="41:299" placeholder="..." />
-                <marker date="1390261348000" expanded="true" signature="214:299" placeholder="..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -64,19 +58,16 @@
       <file leaf-file-name="contact.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/contact.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="22" selection-start="665" selection-end="665" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="848">
-              <folding>
-                <marker date="1390260294000" expanded="true" signature="83:1243" placeholder="..." />
-                <marker date="1390260294000" expanded="true" signature="329:568" placeholder="..." />
-              </folding>
+            <state line="26" column="41" selection-start="730" selection-end="730" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addressbook.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="addressbook.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/addressbook.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="0" selection-start="306" selection-end="306" vertical-scroll-proportion="0.0" vertical-offset="128" max-vertical-offset="368">
+            <state line="15" column="46" selection-start="387" selection-end="387" vertical-scroll-proportion="0.26548672" vertical-offset="0" max-vertical-offset="904">
               <folding />
             </state>
           </provider>
@@ -105,19 +96,19 @@
         <option value="$PROJECT_DIR$/controller/__init__.py" />
         <option value="$PROJECT_DIR$/model/__init__.py" />
         <option value="$PROJECT_DIR$/view/__init__.py" />
-        <option value="$PROJECT_DIR$/model/addressbook.py" />
-        <option value="$PROJECT_DIR$/model/contact.py" />
         <option value="$PROJECT_DIR$/model/email.py" />
         <option value="$PROJECT_DIR$/model/phoneNumber.py" />
         <option value="$PROJECT_DIR$/model/address.py" />
         <option value="$PROJECT_DIR$/model/addressbooks.py" />
+        <option value="$PROJECT_DIR$/model/contact.py" />
+        <option value="$PROJECT_DIR$/model/addressbook.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="714" />
-    <option name="y" value="47" />
-    <option name="width" value="1050" />
+    <option name="x" value="696" />
+    <option name="y" value="37" />
+    <option name="width" value="1212" />
     <option name="height" value="1052" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -356,15 +347,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="714" y="47" width="1050" height="1052" extended-state="0" />
-    <editor active="false" />
+    <frame x="696" y="37" width="1212" height="1052" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293944" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24963072" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18227091" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15694682" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -414,20 +405,14 @@
     <entry file="file://$PROJECT_DIR$/model/phoneNumber.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="0" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0" vertical-offset="112" max-vertical-offset="208">
-          <folding>
-            <marker date="1390261348000" expanded="true" signature="41:299" placeholder="..." />
-            <marker date="1390261348000" expanded="true" signature="214:299" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/contact.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="30" selection-start="291" selection-end="291" vertical-scroll-proportion="0.0" vertical-offset="160" max-vertical-offset="416">
-          <folding>
-            <marker date="1390260294000" expanded="true" signature="83:1243" placeholder="..." />
-            <marker date="1390260294000" expanded="true" signature="329:568" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -472,40 +457,24 @@
         <state line="1" column="0" selection-start="22" selection-end="22" vertical-scroll-proportion="0.018735362" vertical-offset="0" max-vertical-offset="854" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/email.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="80" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
-          <folding>
-            <marker date="1390261252000" expanded="true" signature="35:278" placeholder="..." />
-            <marker date="1390261252000" expanded="true" signature="197:278" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/phoneNumber.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="0" selection-start="300" selection-end="300" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="256">
-          <folding>
-            <marker date="1390261348000" expanded="true" signature="41:299" placeholder="..." />
-            <marker date="1390261348000" expanded="true" signature="214:299" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/addressbook.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="306" selection-end="306" vertical-scroll-proportion="0.0" vertical-offset="128" max-vertical-offset="368">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/contact.py">
+    <entry file="file://$PROJECT_DIR$/model/email.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="22" selection-start="665" selection-end="665" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="848">
-          <folding>
-            <marker date="1390260294000" expanded="true" signature="83:1243" placeholder="..." />
-            <marker date="1390260294000" expanded="true" signature="329:568" placeholder="..." />
-          </folding>
+        <state line="9" column="80" selection-start="278" selection-end="278" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/address.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="30" selection-start="593" selection-end="593" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="352">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -516,9 +485,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/address.py">
+    <entry file="file://$PROJECT_DIR$/model/contact.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="30" selection-start="593" selection-end="593" vertical-scroll-proportion="0.26548672" vertical-offset="0" max-vertical-offset="904">
+        <state line="26" column="41" selection-start="730" selection-end="730" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/addressbook.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="46" selection-start="387" selection-end="387" vertical-scroll-proportion="0.26548672" vertical-offset="0" max-vertical-offset="904">
           <folding />
         </state>
       </provider>

@@ -11,9 +11,7 @@ class contact:
         self.phoneNumberList = []
 
     def __eq__(self, other):
-        return (self.fname == other.fname) and (self.lname == other.lname) \
-            and (self.addressList == other.addressList) and (self.emailList == other.emailList) \
-            and (self.phoneNumberList == other.phoneNumberList)
+        return (self.fname == other.fname) and (self.lname == other.lname)
 
     def addAddresses(self, addr):
         self.addressList.append(addr)
@@ -28,19 +26,19 @@ class contact:
         try:
             self.addressList.remove(addr)
         except ValueError:
-            return -1
+            print("Address not found!")
 
     def removeEmail(self, email):
         try:
             self.emailList.remove(email)
         except ValueError:
-            return -1
+            print("Email not found!")
 
     def removePhoneNumber(self, phoneNumber):
         try:
             self.phoneNumberList.remove(phoneNumber)
         except ValueError:
-            return -1
+            print("Phone Number not found!")
 
 
 
