@@ -9,3 +9,8 @@ class address:
         self.city = city
         self.state = state
         self.zip = zip
+
+    def __eq__(self, other):
+        return (self.addressType and other.addressType) and (self.streetNumber == other.streetNumber) \
+            and (self.streetName == other.streetName) and (self.city == other.city) \
+            and (self.state == other.state) and (self.zip == other.zip)
