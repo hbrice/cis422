@@ -1,5 +1,5 @@
 __author__ = 'lucasr'
-from model import address, email, phoneNumber
+from model import address
 
 class contact:
     """docstring for contact"""
