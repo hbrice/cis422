@@ -1,16 +1,26 @@
 __author__ = 'lucasr'
-from model import contact
+from model.contact import contact
+from operator import attrgetter
 
 class addressbook:
     """docstring for addressbook"""
     def __init__(self):
         self.contacts = []
 
+    def __str__(self):
+        print("+++++++++++++++++++++++++++++++++++++")
+        for i in self.contacts:
+            print(i.fname," ", i.lname)
+            print(i.addressList)
+            print(i.emailList)
+            print(i.phoneNumberList)
+            print("+++++++++++++++++++++++++++++++++++++")
+
     def addContact(self, contact):
         self.contacts.append(contact)
 
-    def findContactByName(self, fname, lname):
-        tmp = contact(fname, lname)
+    def findContactByName(self, recipient):
+        tmp = contact(recipient)
         indices = [i for i, val in enumerate(self.contacts) if val == tmp]
         if (len(indices) > 1):
              print("More than one contact found:")
@@ -22,11 +32,8 @@ class addressbook:
     #def generalSearchContacts(self, keyword):
         #for i in self.contacts:
 
-    def removeContact(self, contact):
-        self.contacts.remove(contact)
-
-    def removeContactByName(self, fname, lname):
-        tmp = contact(fname, lname)
+    def removeContactByName(self, recipient):
+        tmp = contact(recipient)
         indices = [i for i, val in enumerate(self.contacts) if val == tmp]
         if (len(indices) > 1):
             print("More than one contact found:")
@@ -45,13 +52,13 @@ class addressbook:
         else:
             del self.contacts[indices]
 
-    def displayAllContacts(self):
-        for x in range(0, len(self.contacts)):
-            print(self.contacts[x].fname)
-            print(self.contacts[x].lname)
-            print(self.contacts[x].addressList)
-            print(self.contacts[x].emailList)
-            print(self.contacts[x].phoneNumberList)
+    def sortByLname(self):
+        lnameSortList = sorted(self.contacts, key=attrgetter('lname'))
+        print(lnameSortList)
+
+    def sortByZip(self):
+        zipSortList = sorted(self.contacts, key=attrgetter('addressList')[0].zip)
+        print(zipSortList)
 
     def export(self, contacts):
         """Export a line for each contact in the list "contacts" using the specified tab seperated list
