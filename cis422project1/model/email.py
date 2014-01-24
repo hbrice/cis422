@@ -7,4 +7,4 @@ class email:
         self.addr =  addr
 
     def __eq__(self, other):
-        return (self.emailType == other.emailType) and (self.addr == other.addr)
+        return (self.emailType == other.emailType) and (self.addr.lower() == other.addr.lower())

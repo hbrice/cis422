@@ -2,15 +2,20 @@ __author__ = 'lucasr'
 
 class address:
     """docstring for address"""
-    def __init__(self, addressType, streetNumber, streetName, city, state, zip):
-        self.addressType = addressType
-        self.streetNumber = streetNumber
-        self.streetName = streetName
-        self.city = city
-        self.state = state
-        self.zip = zip
+    def __init__(self, last, delivery, second):
+        # Last: City State Zip
+        # Delivery: 1401 SW Main St.
+        # Second: " " or APT 4
+        self.last = last
+        self.delivery = delivery
+        self.second =  second
 
     def __eq__(self, other):
-        return (self.addressType and other.addressType) and (self.streetNumber == other.streetNumber) \
-            and (self.streetName == other.streetName) and (self.city == other.city) \
-            and (self.state == other.state) and (self.zip == other.zip)
+        return (self.last and other.last) and (self.delivery == other.delivery) \
+            and (self.second.lower() == other.second.lower())
+
+    '''def __contains__(self, item):
+        return (item == self.addressType) or (item == self.streetNumber) or \
+        (item == self.streetName) or (item == self.city) or \
+        (item == self.state) or (item == self.zip)'''
+
