@@ -37,10 +37,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addressbook.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="addressbook.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/addressbook.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="25" selection-start="2115" selection-end="2115" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
+            <state line="31" column="42" selection-start="1005" selection-end="1005" vertical-scroll-proportion="0.5021645" vertical-offset="32" max-vertical-offset="1392">
               <folding>
                 <element signature="e#22#55#0" expanded="true" />
               </folding>
@@ -57,10 +57,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contact.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="contact.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/contact.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="44" selection-start="1030" selection-end="1030" vertical-scroll-proportion="0.4978355" vertical-offset="20" max-vertical-offset="1232">
+            <state line="32" column="30" selection-start="1063" selection-end="1063" vertical-scroll-proportion="0.0" vertical-offset="32" max-vertical-offset="1232">
               <folding />
             </state>
           </provider>
@@ -84,8 +84,8 @@
         <option value="$PROJECT_DIR$/model/email.py" />
         <option value="$PROJECT_DIR$/model/phoneNumber.py" />
         <option value="$PROJECT_DIR$/model/address.py" />
-        <option value="$PROJECT_DIR$/model/addressbook.py" />
         <option value="$PROJECT_DIR$/model/contact.py" />
+        <option value="$PROJECT_DIR$/model/addressbook.py" />
       </list>
     </option>
   </component>
@@ -444,15 +444,6 @@
         <state line="1" column="0" selection-start="22" selection-end="22" vertical-scroll-proportion="0.018735362" vertical-offset="0" max-vertical-offset="854" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/addressbook.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="25" selection-start="2115" selection-end="2115" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
-          <folding>
-            <element signature="e#22#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/addressbooks.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="20" selection-start="449" selection-end="449" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="592">
@@ -469,8 +460,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/contact.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="44" selection-start="1030" selection-end="1030" vertical-scroll-proportion="0.4978355" vertical-offset="20" max-vertical-offset="1232">
+        <state line="32" column="30" selection-start="1063" selection-end="1063" vertical-scroll-proportion="0.0" vertical-offset="224" max-vertical-offset="1232">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/addressbook.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="42" selection-start="1005" selection-end="1005" vertical-scroll-proportion="0.5021645" vertical-offset="32" max-vertical-offset="1392">
+          <folding>
+            <element signature="e#22#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

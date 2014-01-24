@@ -27,10 +27,12 @@ class addressbook:
              for i in indices:
                 print(i, " ", self.contacts[indices[i]])
         else:
-            print(self.contacts[indices])
+            print(self.contacts[indices[0]])
 
-    #def generalSearchContacts(self, keyword):
-        #for i in self.contacts:
+    def generalSearchContacts(self, keyword):
+        for i in self.contacts:
+            if keyword in i:
+                print(i)
 
     def removeContactByName(self, recipient):
         tmp = contact(recipient)
@@ -50,7 +52,7 @@ class addressbook:
                 for i in indices:
                     del self.contacts[indices[i]]
         else:
-            del self.contacts[indices]
+            del self.contacts[indices[0]]
 
     def sortByLname(self):
         lnameSortList = sorted(self.contacts, key=attrgetter('lname'))
