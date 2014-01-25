@@ -15,7 +15,7 @@ def isValidInput(inputString, inputFormat):
 #given an .tsv file will output a list of maps
 def importParse(importFile):
     entryList = list()
-    firstLine = true
+    firstLine = True
     header = importFile.readline()
     inputFormat = header.rstrip().split('\t')
     lines = importFile.readlines()[1:]

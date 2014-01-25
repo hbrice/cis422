@@ -1,4 +1,10 @@
 __author__ = 'lucasr'
+
+path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../model'))
+if not path in sys.path:
+    sys.path.insert(1, path)
+del path
+
 from model.addressbook import addressbook
 from model.contact import contact
 from model.address import address
