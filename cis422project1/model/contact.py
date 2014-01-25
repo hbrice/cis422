@@ -10,8 +10,9 @@ class contact:
         # Recipient: John Doe
         # Phone: (503) 809-9120
         # addr = address(last, delivery, second)
-        self.fname = recipient.lower().split(" ")[0]
-        self.lname = recipient.lower().split(" ")[1]
+        name = recipient.lower().split(" ")
+        self.fname = name[0]
+        self.lname = ' '.join(name[1:])
         self.addressList = []
         self.emailList = []
         self.phoneNumberList = []
@@ -20,10 +21,14 @@ class contact:
         return (self.fname == other.fname) and (self.lname == other.lname)
 
     def __str__(self):
-        print(self.fname, " ", self.lname)
-        print(self.addressList)
-        print(self.emailList)
-        print(self.phoneNumberList)
+        name = self.fname + " " + self.lname
+        tmp = ""
+        for i in self.addressList:
+            tmp = tmp + str(i)
+        emails = ', '.join(self.emailList)
+        phoneNumbers = ', '.join(self.phoneNumberList)
+        output = name + "\n" + tmp + "\n" + emails + "\n" + phoneNumbers
+        return output
 
     def __contains__(self, item):
         return (item == self.fname) or (item == self.lname) \
