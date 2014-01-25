@@ -11,6 +11,11 @@ def isValidInput(inputString):
     else:
         return False
 
+#given an .tsv file will output a list of maps
+def importParse(importFile):
+    entryList = list()
+    for line in importFile
+"""
 #given a file will output a list of maps
 def importParse(importFile):
     _FORMAT = ["fname","lname","addr","city","state","zip","phone","email"]
@@ -28,3 +33,4 @@ def importParse(importFile):
     if not entryList:
         print "Empty input"
     return entryList
+"""
