@@ -30,7 +30,7 @@ class contact:
             or (item in self.addressList) or (item in self.emailList) \
             or (item in self.phoneNumberList)
 
-    def addAddresses(self, addr):
+    def addAddress(self, addr):
         if (addr not in self.addressList):
             self.addressList.append(addr)
         else:

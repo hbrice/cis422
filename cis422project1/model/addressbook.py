@@ -10,7 +10,7 @@ class addressbook:
     def __str__(self):
         print("+++++++++++++++++++++++++++++++++++++")
         for i in self.contacts:
-            print(i.fname," ", i.lname)
+            print(i.fname, i.lname)
             print(i.addressList)
             print(i.emailList)
             print(i.phoneNumberList)

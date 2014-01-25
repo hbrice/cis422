@@ -15,6 +15,9 @@ class address:
         return (self.last and other.last) and (self.delivery == other.delivery) \
             and (self.second.lower() == other.second.lower())
 
+    def __str__(self):
+        return self.delivery + " " + self.second + " " + self.last
+
     def __contains__(self, item):
         return (item in self.last) or (item in self.delivery) \
             or (item in self.second) or (item in self.zip)
