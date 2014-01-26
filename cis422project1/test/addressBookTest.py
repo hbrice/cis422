@@ -1,4 +1,5 @@
 __author__ = 'lucasr'
+import os, sys
 
 path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../model'))
 if not path in sys.path:
@@ -16,15 +17,19 @@ def main():
     testDelivery = "1401 SW Main St."
     testSecond = "Apt 4"
     testAddr = address(testLast, testDelivery, testSecond)
-    print(testAddr.last)
-    print(testAddr.delivery)
-    print(testAddr.second)
-    print(testAddr)
-    #testContact1.addAddress(testAddr)
-    #testContact1.addEmail("jdoe@gmail.com")
-    #testContact1.addPhoneNumber("534-235-1356")
-    #testAddressBook.addContact(testContact1)
-    #print(testAddressBook.contacts)
-    #print(testAddressBook)
+    testEmail = "jdoe@gmail.com"
+    testEmail2 = "doe@uoregon.edu"
+    testPhoneNumber = "542-345-6745"
+    testContact1.addAddress(testAddr)
+    testContact1.addEmail(testEmail)
+    testContact1.addEmail(testEmail2)
+    testContact1.addPhoneNumber(testPhoneNumber)
+    testAddressBook.addContact(testContact1)
+    print(testContact1)
+    print(testAddressBook)
+
+
+
+
 if __name__ == '__main__':
     main()

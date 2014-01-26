@@ -8,13 +8,13 @@ class addressbook:
         self.contacts = []
 
     def __str__(self):
-        print("+++++++++++++++++++++++++++++++++++++")
+        output = ""
+        frame = "+++++++++++++++++++++++++++++++++++++"
         for i in self.contacts:
-            print(i.fname, i.lname)
-            print(i.addressList)
-            print(i.emailList)
-            print(i.phoneNumberList)
-            print("+++++++++++++++++++++++++++++++++++++")
+            output = output + frame
+            output = output + str(i)
+        return output
+
 
     def addContact(self, contact):
         self.contacts.append(contact)
@@ -70,7 +70,7 @@ class addressbook:
             for i in contacts:
                 with contacts[i] as contact:
                     f.write(contact.address[0].city + " " + contact.address[0].state + " " + contact.address[0].zip + "\t")
-                    f.write(contact.address[0].streetNumber + " " + contact.address[0].streetName + "\t")
+                    f.write(contact.address[0].addressNumber + " " + contact.address[0].address + "\t")
                     f.write("\t")#f.write(contact.address[0].secondLine + "\t")# second line not implemented yet
                     f.write(contact.fname + " " + contact.lname + "\t")
                     f.write("\n")
