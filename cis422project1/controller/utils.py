@@ -4,7 +4,7 @@
 #...
 
 #The expected header. We can toss anything else out
-_HEADER="City\tState\tZip\tDelivery\tSecond\tRecipient\tPhone\n"
+_HEADER="City\tState\tZip\tDelivery\tSecond\tRecipient\tPhone"
 
 #given an .tsv file will output a list of maps
 def importParse(importFile):
@@ -13,7 +13,7 @@ def importParse(importFile):
     header = importFile.readline()
     if _HEADER in header:
         inputFormat = _HEADER.rstrip().split('\t')
-        lines = importFile.readlines()[1:]
+        lines = importFile.readlines()
         for line in lines:
             #This line is a doozy: first grab the line, strip any trailing whitespace, split it on tabs. 
             #Then make a list of tuples from the input format and that resulting list, turn that into a map, finally append that map to the entrylist
