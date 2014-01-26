@@ -7,7 +7,7 @@ if not path in sys.path:
 del path
 
 
-import contact
+from contact import contact
 from operator import attrgetter
 
 class addressbook:

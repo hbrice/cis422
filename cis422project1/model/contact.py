@@ -6,7 +6,7 @@ if not path in sys.path:
     sys.path.insert(1, path)
 del path
 
-import address
+from address import address
 
 class contact:
     """docstring for contact"""

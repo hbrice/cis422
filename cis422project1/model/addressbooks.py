@@ -6,7 +6,7 @@ if not path in sys.path:
     sys.path.insert(1, path)
 del path
 
-import addressbook
+from addressbook import addressbook
 import pickle
 
 
