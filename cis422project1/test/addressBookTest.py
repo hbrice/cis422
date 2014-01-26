@@ -6,9 +6,9 @@ if not path in sys.path:
     sys.path.insert(1, path)
 del path
 
-import addressbook
-import contact
-import address
+from addressbook import addressbook
+from contact import contact
+from address import address
 
 def main():
     testAddressBook = addressbook()
