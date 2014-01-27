@@ -25,6 +25,12 @@ class address:
         else:
             return self.delivery + " " + self.last
 
+    def __repr__(self):
+        if (self.second != " "):
+            return self.delivery + " " + self.second + " " + self.last
+        else:
+            return self.delivery + " " + self.last
+
     def __contains__(self, item):
         return (item.lower() in self.last) or (item.lower() in self.delivery) \
             or (item.lower() in self.second)

@@ -24,6 +24,22 @@ class contact:
         self.emailList = []
         self.phoneNumberList = []
 
+    def addField(self, name, value):
+        # create local fget and fset functions
+        get = lambda self: self.getField(name)
+        set = lambda self, value: self.setField(name, value)
+
+        # add property to self
+        setattr(self.__class__, name, property(get, set))
+        # add corresponding local variable
+        setattr(self, name, value)
+
+    def setField(self, name, value):
+        setattr(self, name, value)
+
+    def getField(self, name):
+        return getattr(self, name)
+
     def __eq__(self, other):
         return (self.fname == other.fname) and (self.lname == other.lname)
 
