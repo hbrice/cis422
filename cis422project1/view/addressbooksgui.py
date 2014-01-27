@@ -1,88 +1,98 @@
 __author__ = 'josh'
 
-from Tkinter import *
+import Tkinter as tk
 from tkFileDialog import askopenfilename
 from tkFileDialog import asksaveasfile
 from tkFileDialog import asksaveasfilename
 from view import addressbookgui
+import sys
+from model import addressbooks
 
-root = Tk()
-root.geometry("650x500+300+300")
+class AddressBooksFrame():
+    def __init__(self, master, logicObject):
+        self.master = master
+        self.logic = logicObject
+        self.frame = tk.Frame(self.master)
 
-app = addressbookgui.AddressBookFrame(root)
-menuBar = Menu(root)
+        #add the menubar
+        self.menuBar = tk.Menu(self.frame)
+        self.fileMenu = tk.Menu(self.menuBar, tearoff=0)
 
-fileMenu = Menu(menuBar, tearoff=0)
+        #set the default states for the file
+        self.fileMenu.add_command(label="New", command=self.cmdNew)
+        self.fileMenu.add_command(label="Open", command=self.cmdOpen)
+        self.fileMenu.add_command(label="Close", command=self.cmdClose, state=tk.DISABLED)
+        self.fileMenu.add_command(label="Save", command=self.cmdSave, state=tk.DISABLED)
+        self.fileMenu.add_command(label="Save As", command=self.cmdSaveAs, state=tk.DISABLED)
+        self.fileMenu.add_command(label="Import", command=self.cmdImport, state=tk.DISABLED)
+        self.fileMenu.add_command(label="Export", command=self.cmdExport, state=tk.DISABLED)
+        self.fileMenu.add_command(label="Quit", command=self.cmdQuit)
+        self.menuBar.add_cascade(label="File", menu=self.fileMenu)
 
-def cmdClose():
-    print "Close address book"
+        self.master.config(menu=self.menuBar)
 
-    #enable menu options
-    fileMenu.entryconfig(2,state=DISABLED) #close
-    fileMenu.entryconfig(3,state=DISABLED) #Save
-    fileMenu.entryconfig(4,state=DISABLED) #Save As
-    fileMenu.entryconfig(5,state=DISABLED) #Import
-    fileMenu.entryconfig(6,state=DISABLED) #export
+    #action for File-->Close
+    def cmdClose(self):
+        print "Close address book"
 
-def cmdSave():
-    print "Save"
+        #enable menu options
+        self.fileMenu.entryconfig(2,state=tk.DISABLED) #close
+        self.fileMenu.entryconfig(3,state=tk.DISABLED) #Save
+        self.fileMenu.entryconfig(4,state=tk.DISABLED) #Save As
+        self.fileMenu.entryconfig(5,state=tk.DISABLED) #Import
+        self.fileMenu.entryconfig(6,state=tk.DISABLED) #export
 
-def cmdSaveAs():
-    newFileName = asksaveasfilename()
-    print(newFileName)
+    #action for File-->Save
+    def cmdSave(self):
+        print "Save"
 
-def cmdImport():
-    openFileName = askopenfilename()
-    print(openFileName)
+    #action for File-->SaveAs
+    def cmdSaveAs(self):
+        self.newFileName = asksaveasfilename()
+        print(self.newFileName)
 
-def cmdExport():
-    openFileName = askopenfilename()
-    print(openFileName)
+    #action for File-->Import
+    def cmdImport(self):
+        self.openFileName = askopenfilename()
+        print(self.openFileName)
 
-def cmdQuit():
-    sys.exit()
+    #action for File-->Export
+    def cmdExport(self):
+        self.openFileName = askopenfilename()
+        print(self.openFileName)
 
-def cmdNew():
-    newFileName = asksaveasfilename()
-    print(newFileName)
-    #take newFileName and create a new AddressBookFrame within AddressBooksFrame
+    #action for File-->Quit
+    def cmdQuit(self):
+        sys.exit()
 
-    #enable menu options
-    fileMenu.entryconfig(2,state=NORMAL) #close
-    fileMenu.entryconfig(3,state=NORMAL) #Save
-    fileMenu.entryconfig(4,state=NORMAL) #Save As
-    fileMenu.entryconfig(5,state=NORMAL) #Import
-    fileMenu.entryconfig(6,state=NORMAL) #export
+    #action for File-->New
+    def cmdNew(self):
+        #display dialog for new file
+        self.newFileName = asksaveasfilename()
 
-def cmdOpen():
-    openFileName = askopenfilename()
-    print(openFileName)
-    #take openFileName and create a new AddressBookFrame within AddressBooksFrame
+        #print the user selected filename
+        print(self.newFileName)
+        #take newFileName and create a new AddressBookFrame within AddressBooksFrame
 
-    #enable menu options
-    fileMenu.entryconfig(2,state=NORMAL) #close
-    fileMenu.entryconfig(3,state=NORMAL) #Save
-    fileMenu.entryconfig(4,state=NORMAL) #Save As
-    fileMenu.entryconfig(5,state=NORMAL) #Import
-    fileMenu.entryconfig(6,state=NORMAL) #export
+        #enable menu options
+        self.fileMenu.entryconfig(2,state=tk.NORMAL) #close
+        self.fileMenu.entryconfig(3,state=tk.NORMAL) #Save
+        self.fileMenu.entryconfig(4,state=tk.NORMAL) #Save As
+        self.fileMenu.entryconfig(5,state=tk.NORMAL) #Import
+        self.fileMenu.entryconfig(6,state=tk.NORMAL) #export
 
-def main():
+    def cmdOpen(self):
+         #display dialog for new file
+        openFileName = askopenfilename()
 
-    fileMenu.add_command(label="New", command=cmdNew)
-    fileMenu.add_command(label="Open", command=cmdOpen)
-    fileMenu.add_command(label="Close", command=cmdClose, state=DISABLED)
-    fileMenu.add_command(label="Save", command=cmdSave, state=DISABLED)
-    fileMenu.add_command(label="Save As", command=cmdSaveAs, state=DISABLED)
-    fileMenu.add_command(label="Import", command=cmdImport, state=DISABLED)
-    fileMenu.add_command(label="Export", command=cmdExport, state=DISABLED)
-    fileMenu.add_command(label="Quit", command=cmdQuit)
-    menuBar.add_cascade(label="File", menu=fileMenu)
+        #print the user selected filename
+        print(openFileName)
+        #take openFileName and create a new AddressBookFrame within AddressBooksFrame
 
+        #enable menu options
+        self.entryconfig(2,state=tk.NORMAL) #close
+        self.entryconfig(3,state=tk.NORMAL) #Save
+        self.entryconfig(4,state=tk.NORMAL) #Save As
+        self.entryconfig(5,state=tk.NORMAL) #Import
+        self.entryconfig(6,state=tk.NORMAL) #export
 
-    root.config(menu=menuBar)
-
-    root.mainloop()
-
-
-if __name__ == '__main__':
-    main()
