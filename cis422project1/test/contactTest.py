@@ -7,6 +7,7 @@ if not path in sys.path:
 del path
 
 from address import address
+from contact import contact
 
 def main():
     last = "Trentwood OR 94501"

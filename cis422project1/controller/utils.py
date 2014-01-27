@@ -4,7 +4,7 @@
 #...
 
 #The expected header. We can toss anything else out
-_HEADER="City\tState\tZip\tDelivery\tSecond\tRecipient\tPhone"
+_HEADER="Last\tDelivery\tSecond\tRecipient\tPhone"
 
 #given an .tsv file will output a list of maps
 def importParse(importFile):
