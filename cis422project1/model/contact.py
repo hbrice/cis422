@@ -1,5 +1,12 @@
 __author__ = 'lucasr'
-from model.address import address
+
+import os, sys
+path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../model'))
+if not path in sys.path:
+    sys.path.insert(1, path)
+del path
+
+from address import address
 
 class contact:
     """docstring for contact"""

@@ -1,12 +1,13 @@
 __author__ = 'lucasr'
 import os, sys
 
+import os, sys
 path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../model'))
 if not path in sys.path:
     sys.path.insert(1, path)
 del path
 
-from model.address import address
+from address import address
 
 def main():
     last = "Trentwood OR 94501"

@@ -1,7 +1,15 @@
 __author__ = 'lucasr'
-from model import addressbook
-import os.pat
+
+import os, sys
+path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../model'))
+if not path in sys.path:
+    sys.path.insert(1, path)
+del path
+
+from addressbook import addressbook
 import pickle
+
+
 
 class addressbooks:
     """docstring for addressbooks"""
