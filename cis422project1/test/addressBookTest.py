@@ -28,8 +28,5 @@ def main():
     print(testContact1)
     print(testAddressBook)
 
-
-
-
 if __name__ == '__main__':
     main()
