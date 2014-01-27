@@ -5,15 +5,36 @@
 
 Welcome to addressbooks's documentation!
 ========================================
+AddressBook is a python application meant to simplify the chaotic process of creating contacts and organizing address books. 
 
-Contents:
+Features
+--------
+
+- Create a contact with additional 
+- Seemesly move contacts within other addressbooks
+- Edit contacts (delete or add fields)
+- 
+
+Contribute
+----------
+
+- Issue Tracker: github.com/hbrice/cis422/issues
+- Source Code: github.com/hbrice/cis422
+
+Support
+-------
+
+
+Content:
+=========
 
 .. toctree::
    :maxdepth: 2
 
-.. automodule:: io
-	:members:
-
+   intro
+   installation
+   getting started
+   datatypes
 
 
 Indices and tables
