@@ -4,9 +4,12 @@ import os, sys
 path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../model'))
 if not path in sys.path:
     sys.path.insert(1, path)
+path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../controller'))
+if not path in sys.path:
+    sys.path.insert(1, path)
 del path
 
-
+import utils
 from contact import contact
 from operator import attrgetter
 
@@ -82,8 +85,19 @@ class addressbook:
                     f.write("\t")#f.write(contact.address[0].secondLine + "\t")# second line not implemented yet
                     f.write(contact.fname + " " + contact.lname + "\t")
                     f.write("\n")
-
-
+    
+    #takes a fileName and uses the parser, contact, and address to add each line of the file to the addressbook.
+    def addressBookImport(self, fileName):
+        if os.path.exists(fileName):
+            f = open(fileName, 'r')
+            data = utils.importParse(fileName)
+            for element in data:
+                newContact = contact(element['recipient'])
+                newAddress = address(element['last'], element['delivery'], element['second'])
+                newContact.addAddress(newAddress)
+                self.addContact(newContact)
+        #todo: error reporting
+        print "Path doesn't exist."
 
 
 
