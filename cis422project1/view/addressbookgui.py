@@ -66,6 +66,12 @@ class AddressBookFrame():
     def cmdClear(self):
         print "Clear"
 
+    def cmdSortName(self):
+        print "sort by name"
+
+    def cmdSortZIP(self):
+        print "sort by ZIP"
+
 
 
 
@@ -143,6 +149,13 @@ class AddressBookFrame():
         self.btnUpdateContact = tk.Button(self.buttonFrame, text="Update", command=self.cmdUpdate)
         self.btnUpdateContact.grid(row=0, column=2)
 
+        self.btnSortName = tk.Button(self.buttonFrame, text="Sort, Name", command=self.cmdSortName)
+        self.btnSortName.grid(row=0,column=5, sticky=tk.W+tk.E)
+
+        self.btnSortZIP = tk.Button(self.buttonFrame, text="Sort, ZIP", command=self.cmdSortZIP)
+        self.btnSortZIP.grid(row=1,column=5, sticky=tk.W+tk.E)
+
+
         #Search
         self.entrySearch = tk.Entry(self.buttonFrame, width = 15)
         self.entrySearch.grid(row=1,column=0)
@@ -152,6 +165,7 @@ class AddressBookFrame():
 
         self.btnClear = tk.Button(self.buttonFrame, text="Clear", command=self.cmdClear)
         self.btnClear.grid(row=1,column=2, sticky=tk.W+tk.E)
+
 
 
 
