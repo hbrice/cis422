@@ -12,6 +12,7 @@ from address import address
 
 def main():
     testAddressBook = addressbook()
+
     testContact1 = contact("John Doe")
     testLast = "Alameda CA 94501"
     testDelivery = "1401 SW Main St."
@@ -25,8 +26,14 @@ def main():
     testContact1.addEmail(testEmail2)
     testContact1.addPhoneNumber(testPhoneNumber)
     testAddressBook.addContact(testContact1)
-    print(testContact1)
+
+    testAddressBook.generalSearchContacts("mail")
+
+    #print(testContact1)
     print(testAddressBook)
+    #testAddressBook.removeContactByName("John Doe")
+    #print(testAddressBook)
+
 
 if __name__ == '__main__':
     main()

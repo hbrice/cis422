@@ -54,9 +54,9 @@ class contact:
         return output
 
     def __contains__(self, item):
-        return (item == self.fname) or (item == self.lname) \
-            or (item in self.addressList) or (item in self.emailList) \
-            or (item in self.phoneNumberList)
+        return (item in self.fname) or (item in self.lname) \
+            or (item in self.addressList[0]) or (item in self.emailList[0]) \
+            or (item in self.phoneNumberList[0])
 
     def addAddress(self, addr):
         if (addr not in self.addressList):

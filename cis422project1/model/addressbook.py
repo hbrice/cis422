@@ -20,12 +20,11 @@ class addressbook:
 
     def __str__(self):
         output = ""
-        frame = "+++++++++++++++++++++++++++++++++++++"
+        frame = "+++++++++++++++++++++++++++++++++++++\n"
         for i in self.contacts:
             output = output + frame
             output = output + str(i)
         return output
-
 
     def addContact(self, contact):
         self.contacts.append(contact)
@@ -42,7 +41,7 @@ class addressbook:
 
     def generalSearchContacts(self, keyword):
         for i in self.contacts:
-            if keyword in i:
+            if keyword.lower() in i:
                 print(i)
 
     def removeContactByName(self, recipient):
