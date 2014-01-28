@@ -21,6 +21,7 @@ class contact:
         self.fname = name[0]
         self.lname = ' '.join(name[1:])
         self.addressList = []
+        self.firstZip = 0
         self.emailList = []
         self.phoneNumberList = []
 
@@ -50,16 +51,32 @@ class contact:
             tmp = tmp + str(i)
         emails = ', '.join(self.emailList)
         phoneNumbers = ', '.join(self.phoneNumberList)
-        output = name + "\n" + tmp + "\n" + emails + "\n" + phoneNumbers
+        output = name + "\n" + tmp + "\n" + emails + "\n" + phoneNumbers + "\n"
         return output
 
     def __contains__(self, item):
-        return (item in self.fname) or (item in self.lname) \
-            or (item in self.addressList[0]) or (item in self.emailList[0]) \
-            or (item in self.phoneNumberList[0])
+        inName = ((item in self.fname) or (item in self.lname))
+        inAddrList = False
+        inEmailList = False
+        inPhoneList = False
+        for i in self.addressList:
+            if (item in i):
+                inAddrList = True
+        for i in self.emailList:
+            if (item in i):
+                inEmailList = True
+        for i in self.phoneNumberList:
+            if (item in i):
+                inPhoneList = True
+        return (inName or inAddrList or inEmailList or inPhoneList)
+
+    def __getitem__(self, item):
+        return self.addressList[0].zip
 
     def addAddress(self, addr):
         if (addr not in self.addressList):
+            if (self.addressList == []):
+                self.firstZip =  int(addr.zip)
             self.addressList.append(addr)
         else:
             print("Address already added to this contact")

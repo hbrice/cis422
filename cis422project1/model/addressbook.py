@@ -11,6 +11,7 @@ del path
 
 import utils
 from contact import contact
+from address import address
 from operator import attrgetter
 
 class addressbook:
@@ -36,8 +37,10 @@ class addressbook:
              print("More than one contact found:")
              for i in indices:
                 print(i, " ", self.contacts[indices[i]])
-        else:
+        elif (len(indices) == 1):
             print(self.contacts[indices[0]])
+        else:
+            print("Contact Not Found!")
 
     def generalSearchContacts(self, keyword):
         for i in self.contacts:
@@ -66,11 +69,14 @@ class addressbook:
 
     def sortByLname(self):
         lnameSortList = sorted(self.contacts, key=attrgetter('lname'))
-        print(lnameSortList)
+        self.contacts = lnameSortList
+        #print(lnameSortList)
 
     def sortByZip(self):
-        zipSortList = sorted(self.contacts, key=attrgetter('addressList')[0].zip)
-        print(zipSortList)
+        #zipList = [int(x.firstZip) for x in self.contacts]
+        zipSortList = sorted(self.contacts, key=attrgetter('firstZip'))
+        self.contacts = zipSortList
+        #print(zipSortList)
 
     def export(self, contacts, fileName):
         """Export a line for each contact in the list "contacts" using the specified tab seperated list
