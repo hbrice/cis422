@@ -4,10 +4,11 @@ import Tkinter as tk
 from model import addressbooks
 def main():
     print "Main"
-    logic=addressbooks.addressbooks
+
     root = tk.Tk()
     root.geometry("650x500+300+300")
-    app=addressbooksgui.AddressBooksFrame(root,logic)
+    root.title("AddressBooks")
+    app=addressbooksgui.AddressBooksFrame(root)
     root.mainloop()
 
 
