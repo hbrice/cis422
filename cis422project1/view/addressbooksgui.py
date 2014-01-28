@@ -46,7 +46,12 @@ class AddressBooksFrame():
     def cmdClose(self):
         print "Close address book"
 
-        #enable menu options
+        #remove the container frame
+        self.app.frame.grid_forget()
+        #we won't need any pointer to is so destroy
+        self.app.frame.destroy()
+
+        #disable menu options
         self.fileMenu.entryconfig(2,state=tk.DISABLED) #close
         self.fileMenu.entryconfig(3,state=tk.DISABLED) #Save
         self.fileMenu.entryconfig(4,state=tk.DISABLED) #Save As
@@ -55,16 +60,27 @@ class AddressBooksFrame():
 
     #action for File-->Save
     def cmdSave(self):
-        self.books.save(self.saveFileName)
-        print "Save"
+        #if the filename is not blank
+        if self.saveFileName != "":
+            print("Save to: " + self.saveFileName)
+            #call the save function
+            self.books.save(self.saveFileName)
 
     #action for File-->SaveAs
     def cmdSaveAs(self):
-        #prompt for a file location
-        self.saveFileName = asksaveasfilename()
-        #once it's been saved once we can save without prompting
-        self.fileMenu.entryconfig(3,state=tk.DISABLED) #Save
-        print(self.saveFileName)
+        try:
+            #prompt for a file location
+            self.saveFileName = asksaveasfilename()
+        except:
+            print "Save As error"
+
+        #if the filename is not blank
+        if self.saveFileName != "":
+            print("Save to: " + self.saveFileName)
+            #once it's been saved once we can save without prompting
+            self.fileMenu.entryconfig(3,state=tk.NORMAL) #Save
+            #call the save function
+            self.books.save(self.saveFileName)
 
     #action for File-->Import
     def cmdImport(self):
@@ -81,6 +97,7 @@ class AddressBooksFrame():
 
     #action for File-->Quit
     def cmdQuit(self):
+        #close hte whole program
         sys.exit()
 
     #action for File-->New
@@ -128,9 +145,6 @@ class AddressBooksFrame():
             self.books.load(self.openFileName)
 
             self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.books.addressBooksList[0])
-
-
-
 
             #enable menu options
             self.fileMenu.entryconfig(2,state=tk.NORMAL) #close
