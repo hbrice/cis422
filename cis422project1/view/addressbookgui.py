@@ -1,127 +1,157 @@
-from Tkinter import *
+import Tkinter as tk
 from tkFileDialog import askopenfilename
 from tkFileDialog import asksaveasfile
 from tkFileDialog import asksaveasfilename
+from model import addressbooks
+from model import addressbook
+from model import contact
+from model import address
+class AddressBookFrame():
+
+    def __init__(self, master, addressBookLogic):
+
+        self.master = master
 
 
-class AddressBookFrame(Frame):
+        self.frame = tk.Frame(self.master)
+        self.frame.grid(row=0,column=0)
+        self.contactFrame = tk.Frame(self.frame)
+        self.EntryFrame = tk.Frame(self.frame)
+        self.buttonFrame = tk.Frame(self.frame)
 
-    def __init__(self, parent):
-        Frame.__init__(self, parent)
 
-        self.parent = parent
+        #self.logic = addressBookLogic #run
+        self.logic = addressbook.addressbook #code
+
         self.initUI()
+        self.buttonFrame.pack(side=tk.BOTTOM, pady=5)
+        self.contactFrame.pack(side=tk.LEFT)
+        self.EntryFrame.pack(side=tk.LEFT, padx=5)
+
+
 
     def cmdAdd(self):
-        print "Add contact"
+        #create a new contact based on the contact's name
+        self.tempContact = contact.contact(self.entryName.get())
+        #build a temp address
+        self.tempAddress = address.address(self.entryAddress1.get(),self.entryName.get(),self.entryAddress2.get())
+        #add the address to the contact object
+        self.tempContact.addAddress(self.tempAddress)
+        #get and add the phone number to the contact object
+        self.tempContact.addPhoneNumber(self.entryPhone.get())
+        #add the contact to the address book
+        self.logic.addContact(self.tempContact)
+        #add the contact to the contact listbox
+        self.contactsList.insert(0,self.entryName.get())
 
     def cmdRemove(self):
-        print "Remove"
+        #remove the selected contact from the address book
+        self.logic.removeContactByName(self.contactsList.get(tk.ACTIVE))
+        #remove the selected contact from the list box
+        self.contactsList.delete(self.contactsList.index(tk.ACTIVE))
+        #clear all the entry boxes
+        self.entryAddress1.delete(0,tk.END)
+        self.entryAddress2.delete(0,tk.END)
+        self.entryEmail.delete(0,tk.END)
+        self.entryPhone.delete(0,tk.END)
+        self.entryName.delete(0,tk.END)
+
 
     def cmdSearch(self):
         print "Search"
 
     def cmdUpdate(self):
         print "Update"
+        self.tempContact = self.logic.findContactByName(self.entryName.get())
+    def cmdClear(self):
+        print "Clear"
+
 
 
 
     def initUI(self):
-
-        self.parent.title("AddressBooks")
-
-        self.pack(fill=BOTH, expand=1)
-        self.var = IntVar()
-
+        #############################
+        #Contact List/contactFrame
+        #############################
 
         #TO-DO add scrollbar, need to make frame to hold listbox and scrollbar then add that frame
 
         #scrollbar for contactsList
-        sbContactsList = Scrollbar(self)
-        sbContactsList.pack(side=RIGHT, fill=Y)
+        #sbContactsList = tk.Scrollbar(self.frame)
+        #sbContactsList.pack(side=tk.RIGHT, fill=tk.Y)
 
         #Contacts list
-        contactsList = Listbox(self, width=25, height=15)
-        contactsList.pack()
-        contactsList.place(x=25, y=100)
+        self.contactsList = tk.Listbox(self.contactFrame, width=25, height=15, selectmode=tk.EXTENDED)
+        self.contactsList.grid(row=0, column=0)
+
 
         #add scrollbar to contactsList
-        contactsList.config(yscrollcommand=sbContactsList.set)
-        sbContactsList.config(command=contactsList.yview())
+        #contactsList.config(yscrollcommand=sbContactsList.set)
+        #sbContactsList.config(command=contactsList.yview())
 
-        contactsList.insert(END,"John Smith")
-        contactsList.insert(END,"Jane Smith")
+        #contactsList.insert(tk.END,"John Smith")
+        #contactsList.insert(tk.END,"Jane Smith")
 
-        #Contact info
+        #############################
+        #Entry/entryFrame
+        #############################
 
         #Name
-        labelName = Label(self, text="Name")
-        labelName.pack()
-        labelName.place(x=200,y=90)
+        self.labelName = tk.Label(self.EntryFrame, text="Name")
+        self.labelName.grid(row=0,column=0)
 
-        entryName = Entry(self)
-        entryName.pack()
-        entryName.place(x=200,y=110)
+        self.entryName = tk.Entry(self.EntryFrame)
+        self.entryName.grid(row=1,column=0)
 
         #Address line 1
-        labelAddress1 = Label(self, text="Address Line 1")
-        labelAddress1.pack()
-        labelAddress1.place(x=200,y=140)
+        self.labelAddress1 = tk.Label(self.EntryFrame, text="Address Line 1")
+        self.labelAddress1.grid(row=2,column=0)
 
-        entryAddress1 = Entry(self)
-        entryAddress1.pack()
-        entryAddress1.place(x=200,y=160)
+        self.entryAddress1 = tk.Entry(self.EntryFrame)
+        self.entryAddress1.grid(row=3,column=0)
 
         #Address line 2
-        labelAddress2 = Label(self, text="Address Line 2")
-        labelAddress2.pack()
-        labelAddress2.place(x=200,y=190)
+        self.labelAddress2 = tk.Label(self.EntryFrame, text="Address Line 2")
+        self.labelAddress2.grid(row=4,column=0)
 
-        entryAddress2 = Entry(self)
-        entryAddress2.pack()
-        entryAddress2.place(x=200,y=210)
-
+        self.entryAddress2 = tk.Entry(self.EntryFrame)
+        self.entryAddress2.grid(row=5,column=0)
 
         #Email
-        labelEmail = Label(self, text="Email Address")
-        labelEmail.pack()
-        labelEmail.place(x=200,y=240)
+        self.labelEmail = tk.Label(self.EntryFrame, text="Email Address")
+        self.labelEmail.grid(row=6,column=0)
 
-        entryEmail = Entry(self)
-        entryEmail.pack()
-        entryEmail.place(x=200,y=260)
+        self.entryEmail = tk.Entry(self.EntryFrame)
+        self.entryEmail.grid(row=7,column=0)
 
         #Phone
-        labelEmail = Label(self, text="Phone Number")
-        labelEmail.pack()
-        labelEmail.place(x=200,y=290)
+        self.labelPhone = tk.Label(self.EntryFrame, text="Phone Number")
+        self.labelPhone.grid(row=8,column=0)
 
-        entryEmail = Entry(self)
-        entryEmail.pack()
-        entryEmail.place(x=200,y=310)
+        self.entryPhone = tk.Entry(self.EntryFrame)
+        self.entryPhone.grid(row=9,column=0)
 
-        #buttons
-        btnAddContact = Button(self, text="Add", command=self.cmdAdd)
-        btnAddContact.pack(fill=BOTH, expand=1)
-        btnAddContact.place(x=25, y=350)
+        #############################
+        #Buttons/buttonFrame
+        #############################
+        self.btnAddContact = tk.Button(self.buttonFrame, text="Add", command=self.cmdAdd)
+        self.btnAddContact.grid(row=0, column=0, sticky=tk.W+tk.E)
 
-        btnRemoveContact = Button(self, text="Remove", command=self.cmdRemove)
-        btnRemoveContact.pack(fill=BOTH, expand=1)
-        btnRemoveContact.place(x=67, y=350)
+        self.btnRemoveContact = tk.Button(self.buttonFrame, text="Remove", command=self.cmdRemove)
+        self.btnRemoveContact.grid(row=0, column=1)
 
-        btnUpdateContact = Button(self, text="Update", command=self.cmdUpdate)
-        btnUpdateContact.pack(fill=BOTH, expand=1)
-        btnUpdateContact.place(x=130, y=350)
-
+        self.btnUpdateContact = tk.Button(self.buttonFrame, text="Update", command=self.cmdUpdate)
+        self.btnUpdateContact.grid(row=0, column=2)
 
         #Search
-        entrySearch = Entry(self, width = 15)
-        entrySearch.pack()
-        entrySearch.place(x=25,y=392)
+        self.entrySearch = tk.Entry(self.buttonFrame, width = 15)
+        self.entrySearch.grid(row=1,column=0)
 
-        btnSearch = Button(self, text="Search", command=self.cmdSearch)
-        btnSearch.pack(fill=BOTH, expand=1)
-        btnSearch.place(x=130, y=390)
+        self.btnSearch = tk.Button(self.buttonFrame, text="Search", command=self.cmdSearch)
+        self.btnSearch.grid(row=1,column=1, sticky=tk.W+tk.E)
+
+        self.btnClear = tk.Button(self.buttonFrame, text="Clear", command=self.cmdClear)
+        self.btnClear.grid(row=1,column=2, sticky=tk.W+tk.E)
 
 
 

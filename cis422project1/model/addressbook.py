@@ -72,11 +72,11 @@ class addressbook:
         zipSortList = sorted(self.contacts, key=attrgetter('addressList')[0].zip)
         print(zipSortList)
 
-    def export(self, contacts):
+    def export(self, contacts, fileName):
         """Export a line for each contact in the list "contacts" using the specified tab seperated list
            Last\tDelivery\tSecond\Recipient\tPhone
         """
-        with open("tmp.txt") as f:
+        with open(fileName) as f:
             for i in contacts:
                 with contacts[i] as contact:
                     f.write(contact.address[0].city + " " + contact.address[0].state + " " + contact.address[0].zip + "\t")
@@ -86,7 +86,7 @@ class addressbook:
                     f.write("\n")
     
     #takes a fileName and uses the parser, contact, and address to add each line of the file to the addressbook.
-    def addressBookImport(self, fileName):
+    def addressBookImport(self, fileName, contactList):
         if os.path.exists(fileName):
             f = open(fileName, 'r')
             data = utils.importParse(fileName)
@@ -95,6 +95,7 @@ class addressbook:
                 newAddress = address(element['last'], element['delivery'], element['second'])
                 newContact.addAddress(newAddress)
                 self.addContact(newContact)
+                contactList.insert(0,element['recipient'])
         #todo: error reporting
         print "Path doesn't exist."
 

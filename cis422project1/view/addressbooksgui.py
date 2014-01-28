@@ -7,15 +7,26 @@ from tkFileDialog import asksaveasfilename
 from view import addressbookgui
 import sys
 from model import addressbooks
+from model import addressbook
 
 class AddressBooksFrame():
-    def __init__(self, master, logicObject):
+
+    def __init__(self, master):
         self.master = master
-        self.logic = logicObject
-        self.frame = tk.Frame(self.master)
+
+        #container for ALL the addressbook
+        self.books = addressbooks.addressbooks()
+
+       # self.newWindow = tk.Toplevel(self.master)
+        self.topFrame = tk.Frame(self.master)
+        self.topFrame.pack(side = tk.TOP)
+        self.bottomFrame = tk.Frame(self.master)
+
+      #  self.bottomFrame.pack(side = tk.BOTTOM)
+        self.bottomFrame.pack(fill=tk.BOTH)
 
         #add the menubar
-        self.menuBar = tk.Menu(self.frame)
+        self.menuBar = tk.Menu(self.topFrame)
         self.fileMenu = tk.Menu(self.menuBar, tearoff=0)
 
         #set the default states for the file
@@ -44,22 +55,29 @@ class AddressBooksFrame():
 
     #action for File-->Save
     def cmdSave(self):
+        self.books.save(self.saveFileName)
         print "Save"
 
     #action for File-->SaveAs
     def cmdSaveAs(self):
-        self.newFileName = asksaveasfilename()
-        print(self.newFileName)
+        #prompt for a file location
+        self.saveFileName = asksaveasfilename()
+        #once it's been saved once we can save without prompting
+        self.fileMenu.entryconfig(3,state=tk.DISABLED) #Save
+        print(self.saveFileName)
 
     #action for File-->Import
     def cmdImport(self):
         self.openFileName = askopenfilename()
         print(self.openFileName)
+        self.mainBook.addressBookImport(self.openFileName,self.app.contactsList)
 
     #action for File-->Export
     def cmdExport(self):
         self.openFileName = askopenfilename()
         print(self.openFileName)
+        #self.mainBook.export(.mainBook.)
+        print(self.app.contactsList.curselection())
 
     #action for File-->Quit
     def cmdQuit(self):
@@ -67,32 +85,56 @@ class AddressBooksFrame():
 
     #action for File-->New
     def cmdNew(self):
-        #display dialog for new file
-        self.newFileName = asksaveasfilename()
+        try:
+            #display dialog for new file
+             self.newFileName = asksaveasfilename()
+        except:
+            print "Error"
+            return
 
         #print the user selected filename
         print(self.newFileName)
         #take newFileName and create a new AddressBookFrame within AddressBooksFrame
 
-        #enable menu options
-        self.fileMenu.entryconfig(2,state=tk.NORMAL) #close
-        self.fileMenu.entryconfig(3,state=tk.NORMAL) #Save
-        self.fileMenu.entryconfig(4,state=tk.NORMAL) #Save As
-        self.fileMenu.entryconfig(5,state=tk.NORMAL) #Import
-        self.fileMenu.entryconfig(6,state=tk.NORMAL) #export
+        if self.newFileName != "":
+            #for now we have a single address book
+            self.mainBook = addressbook.addressbook()
+
+            #add the single addressbook to the addressbooks container
+            self.books.addAddressBook(self.mainBook)
+
+            self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.mainBook)
+
+            #enable menu options
+            self.fileMenu.entryconfig(2,state=tk.NORMAL) #close
+            self.fileMenu.entryconfig(4,state=tk.NORMAL) #Save As
+            self.fileMenu.entryconfig(5,state=tk.NORMAL) #Import
+            self.fileMenu.entryconfig(6,state=tk.NORMAL) #export
 
     def cmdOpen(self):
-         #display dialog for new file
-        openFileName = askopenfilename()
+        try:
+            #display dialog for new file
+             self.openFileName = askopenfilename()
+        except:
+            print "Error"
+            return
 
         #print the user selected filename
-        print(openFileName)
-        #take openFileName and create a new AddressBookFrame within AddressBooksFrame
+        print(self.openFileName)
+        #take newFileName and create a new AddressBookFrame within AddressBooksFrame
 
-        #enable menu options
-        self.entryconfig(2,state=tk.NORMAL) #close
-        self.entryconfig(3,state=tk.NORMAL) #Save
-        self.entryconfig(4,state=tk.NORMAL) #Save As
-        self.entryconfig(5,state=tk.NORMAL) #Import
-        self.entryconfig(6,state=tk.NORMAL) #export
+        if self.openFileName != "":
+
+            self.books.load(self.openFileName)
+
+            self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.books.addressBooksList[0])
+
+
+
+
+            #enable menu options
+            self.fileMenu.entryconfig(2,state=tk.NORMAL) #close
+            self.fileMenu.entryconfig(4,state=tk.NORMAL) #Save As
+            self.fileMenu.entryconfig(5,state=tk.NORMAL) #Import
+            self.fileMenu.entryconfig(6,state=tk.NORMAL) #export
 
