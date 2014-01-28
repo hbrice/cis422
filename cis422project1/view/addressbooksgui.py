@@ -124,13 +124,13 @@ class AddressBooksFrame():
         #take newFileName and create a new AddressBookFrame within AddressBooksFrame
 
         if self.openFileName != "":
-            #for now we have a single address book
-            self.mainBook = addressbook.addressbook()
 
-            #add the single addressbook to the addressbooks container
-            self.books.addAddressBook(self.mainBook)
+            self.books.load(self.openFileName)
 
-            self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.mainBook)
+            self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.books.addressBooksList[0])
+
+
+
 
             #enable menu options
             self.fileMenu.entryconfig(2,state=tk.NORMAL) #close
