@@ -10,6 +10,7 @@ if not path in sys.path:
 del path
 
 import utils
+import tkMessageBox
 from contact import contact
 from address import address
 from operator import attrgetter
@@ -40,12 +41,17 @@ class addressbook:
         elif (len(indices) == 1):
             print(self.contacts[indices[0]])
         else:
-            print("Contact Not Found!")
+            # Use this for alert window
+            tkMessageBox.showinfo("Alert", "Contact Not Found!")
+            #print("Contact Not Found!")
 
     def generalSearchContacts(self, keyword):
+        found = []
         for i in self.contacts:
             if keyword.lower() in i:
-                print(i)
+                found.append(i)
+        if (found == []):
+            tkMessageBox.showinfo("Alert", "No Matches Found!")
 
     def removeContactByName(self, recipient):
         tmp = contact(recipient)

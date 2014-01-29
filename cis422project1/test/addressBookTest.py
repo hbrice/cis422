@@ -70,6 +70,7 @@ def main():
     print(testContact3.firstZip)
     #
     #testAddressBook.findContactByName("Je")
+    testAddressBook.generalSearchContacts("SW2")
     # THIS WORKS!!
     #testAddressBook.removeContactByName("John Doe")
     #print(testAddressBook)

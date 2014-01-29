@@ -5,8 +5,9 @@ path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../model'))
 if not path in sys.path:
     sys.path.insert(1, path)
 del path
-
 from address import address
+import tkMessageBox
+
 
 class contact:
     """docstring for contact"""
@@ -70,46 +71,43 @@ class contact:
                 inPhoneList = True
         return (inName or inAddrList or inEmailList or inPhoneList)
 
-    def __getitem__(self, item):
-        return self.addressList[0].zip
-
     def addAddress(self, addr):
         if (addr not in self.addressList):
             if (self.addressList == []):
                 self.firstZip =  int(addr.zip)
             self.addressList.append(addr)
         else:
-            print("Address already added to this contact")
+            tkMessageBox.showinfo("Alert", "Address Already Added to This Contacts!")
 
     def addEmail(self, email):
         if (email.lower() not in self.emailList):
             self.emailList.append(email)
         else:
-            print("Email already added to this contact")
+            tkMessageBox.showinfo("Alert", "Email Already added to this contact")
 
     def addPhoneNumber(self, phoneNumber):
         if (phoneNumber not in self.phoneNumberList):
             self.phoneNumberList.append(phoneNumber)
         else:
-            print("Phone number already added to this contact")
+            tkMessageBox.showinfo("Alert", "Phone number already added to this contact")
 
     def removeAddress(self, addr):
         try:
             self.addressList.remove(addr)
         except ValueError:
-            print("Address not found!")
+            tkMessageBox.showinfo("Alert", "Address not found!")
 
     def removeEmail(self, email):
         try:
             self.emailList.remove(email)
         except ValueError:
-            print("Email not found!")
+            tkMessageBox.showinfo("Alert", "Email not found!")
 
     def removePhoneNumber(self, phoneNumber):
         try:
             self.phoneNumberList.remove(phoneNumber)
         except ValueError:
-            print("Phone Number not found!")
+            tkMessageBox.showinfo("Alert", "Phone Number not found!")
 
 
 
