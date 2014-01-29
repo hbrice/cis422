@@ -57,14 +57,15 @@ class addressbook:
         tmp = contact(recipient)
         indices = [i for i, val in enumerate(self.contacts) if val == tmp]
         if (len(indices) > 1):
-            print("More than one contact found:")
+            #print("More than one contact found:")
+            result = tkMessageBox.askquestion("Alert", "More Than One Contact Found, "
+                                                       "Please specify by index for the correct contact to delete. "
+                                                       "Or type 'all' to delete all contacts found:", icon='warning')
             for i in indices:
                 print(i, " ", self.contacts[indices[i]])
-            idx = input("Please specify by index for the correct contact to delete. "
-                        "Or type 'all' to delete all contacts found: ")
-            if idx != "all":
+            if result != "all":
                 try:
-                    del self.contacts[idx]
+                    del self.contacts[result]
                 except ValueError:
                     print("Not a correct index!")
             else:
