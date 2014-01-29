@@ -82,19 +82,34 @@ class AddressBookFrame():
         tmpContact = self.contactPairs[index]
         self.entryName.delete(0,tk.END)
         self.entryName.insert(0, tmpContact.fname + " " + tmpContact.lname)
+
+        self.entryAddressLast.delete(0,tk.END)
+        self.entryAddressLast.insert(0, tmpContact.addressList[0].last)
+
+        self.entryAddressDelivery.delete(0,tk.END)
+        self.entryAddressDelivery.insert(0, tmpContact.addressList[0].delivery)
+
+        self.entryAddressSecond.delete(0,tk.END)
+        self.entryAddressSecond.insert(0, tmpContact.addressList[0].second)
+
         self.entryEmail.delete(0,tk.END)
-        self.entryEmail.insert(0, tmpContact.emailList[0])
+        if len(tmpContact.emailList) > 0:
+            self.entryEmail.insert(0, tmpContact.emailList[0])
+
         self.entryPhone.delete(0,tk.END)
-        self.entryPhone.insert(0, tmpContact.phoneNumberList[0])
+        if len(tmpContact.phoneNumberList) > 0:
+            self.entryPhone.insert(0, tmpContact.phoneNumberList[0])
 
 
     def cmdAdd(self):
         #create a new contact based on the contact's name
         self.tempContact = contact.contact(self.entryName.get())
         #build a temp address
-        self.tempAddress = address.address(self.entryAddress1.get(),self.entryName.get(),self.entryAddress2.get())
+        self.tempAddress = address.address(self.entryAddressLast.get(),self.entryAddressDelivery.get(),self.entryAddressSecond.get())
         #add the address to the contact object
         self.tempContact.addAddress(self.tempAddress)
+        #add the email address to the contact object
+        self.tempContact.addEmail(self.entryEmail.get())
         #get and add the phone number to the contact object
         self.tempContact.addPhoneNumber(self.entryPhone.get())
         #add the contact to the address book
@@ -202,32 +217,39 @@ class AddressBookFrame():
         self.entryName.grid(row=1,column=0)
 
         #Address line 1
-        self.labelAddress1 = tk.Label(self.EntryFrame, text="Address Line 1")
-        self.labelAddress1.grid(row=2,column=0)
+        self.labelAddressLast = tk.Label(self.EntryFrame, text="Last")
+        self.labelAddressLast.grid(row=2,column=0)
 
-        self.entryAddress1 = tk.Entry(self.EntryFrame)
-        self.entryAddress1.grid(row=3,column=0)
+        self.entryAddressLast = tk.Entry(self.EntryFrame)
+        self.entryAddressLast.grid(row=3,column=0)
 
         #Address line 2
-        self.labelAddress2 = tk.Label(self.EntryFrame, text="Address Line 2")
-        self.labelAddress2.grid(row=4,column=0)
+        self.labelAddressDelivery = tk.Label(self.EntryFrame, text="Delivery")
+        self.labelAddressDelivery.grid(row=4,column=0)
 
-        self.entryAddress2 = tk.Entry(self.EntryFrame)
-        self.entryAddress2.grid(row=5,column=0)
+        self.entryAddressDelivery = tk.Entry(self.EntryFrame)
+        self.entryAddressDelivery.grid(row=5,column=0)
+
+        #Address line 3
+        self.labelAddressSecond = tk.Label(self.EntryFrame, text="Second")
+        self.labelAddressSecond.grid(row=6,column=0)
+
+        self.entryAddressSecond = tk.Entry(self.EntryFrame)
+        self.entryAddressSecond.grid(row=7,column=0)
 
         #Email
         self.labelEmail = tk.Label(self.EntryFrame, text="Email Address")
-        self.labelEmail.grid(row=6,column=0)
+        self.labelEmail.grid(row=8,column=0)
 
         self.entryEmail = tk.Entry(self.EntryFrame)
-        self.entryEmail.grid(row=7,column=0)
+        self.entryEmail.grid(row=9,column=0)
 
         #Phone
         self.labelPhone = tk.Label(self.EntryFrame, text="Phone Number")
-        self.labelPhone.grid(row=8,column=0)
+        self.labelPhone.grid(row=10,column=0)
 
         self.entryPhone = tk.Entry(self.EntryFrame)
-        self.entryPhone.grid(row=9,column=0)
+        self.entryPhone.grid(row=11,column=0)
 
         #############################
         #Buttons/buttonFrame
