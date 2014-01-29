@@ -8,6 +8,7 @@ from view import addressbookgui
 import sys
 from model import addressbooks
 from model import addressbook
+import tkMessageBox
 
 class AddressBooksFrame():
 
@@ -90,10 +91,20 @@ class AddressBooksFrame():
 
     #action for File-->Export
     def cmdExport(self):
-        self.openFileName = askopenfilename()
-        print(self.openFileName)
+        self.exportFileName = asksaveasfilename()
+        tempContacts = []
+        print self.app.contactsList.curselection()
+        for x in self.app.contactsList.curselection():
+            print x
+            print self.app.contactPairs[int(x)+1]
+            tempContacts.append(self.app.contactPairs[int(x)+1])
+        self.mainBook.export(tempContacts,self.exportFileName)
+
+       # print(self.exportFileName)
         #self.mainBook.export(.mainBook.)
-        print(self.app.contactsList.curselection())
+       # print(self.app.contactsList.curselection())
+
+        #self.mainBook.e
 
     #action for File-->Quit
     def cmdQuit(self):
@@ -102,6 +113,7 @@ class AddressBooksFrame():
 
     #action for File-->New
     def cmdNew(self):
+
         try:
             #display dialog for new file
              self.newFileName = asksaveasfilename()
