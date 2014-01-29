@@ -63,6 +63,7 @@ class AddressBookFrame():
         self.EntryFrame = tk.Frame(self.frame)
         self.buttonFrame = tk.Frame(self.frame)
 
+        self.entryChanged = 0
 
         self.logic = addressBookLogic #run
         #self.logic = addressbook.addressbook #code
@@ -256,7 +257,3 @@ class AddressBookFrame():
 
         self.btnClear = tk.Button(self.buttonFrame, text="Clear", command=self.cmdClear)
         self.btnClear.grid(row=1,column=2, sticky=tk.W+tk.E)
-
-
-
-
