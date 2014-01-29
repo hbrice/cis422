@@ -131,11 +131,13 @@ class AddressBookFrame():
                 self.logic.removeContact(tempContact)
 
                 #clear all the entry boxes
-                self.entryAddress1.delete(0,tk.END)
-                self.entryAddress2.delete(0,tk.END)
+                self.entryAddressSecond.delete(0,tk.END)
+                self.entryAddressDelivery.delete(0,tk.END)
+                self.entryAddressLast.delete(0,tk.END)
                 self.entryEmail.delete(0,tk.END)
                 self.entryPhone.delete(0,tk.END)
                 self.entryName.delete(0,tk.END)
+                self.cmdUpdateListbox(self.logic.contacts)
         else:
             tkMessageBox.showinfo("Not enough!", "No entries selected.")
 
@@ -145,16 +147,21 @@ class AddressBookFrame():
         query = self.entrySearch.get()
         if query != "":
             results=self.logic.findContactByName(query)
-            if results == []:
+            if results != []:
                 self.cmdUpdateListbox(results)
+            else:
+                self.cmdClearListBox
+
 
     def cmdGeneralSearch(self):
         print "General Search"
         query = self.entrySearch.get()
         if query != "":
             results=self.logic.generalSearchContacts(query)
-            if results == []:
+            if results != []:
                 self.cmdUpdateListbox(results)
+            else:
+                self.cmdClearListBox
 
     def cmdUpdate(self):
         print "Update"
@@ -188,6 +195,9 @@ class AddressBookFrame():
         print "sort by ZIP"
         self.logic.sortByZip()
         self.cmdUpdateListbox(self.logic.contacts)
+
+    def cmdClearListBox(self):
+        self.contactsList.delete(0,tk.END)
 
     def cmdUpdateListbox(self, contacts):
         currentContacts = contacts
