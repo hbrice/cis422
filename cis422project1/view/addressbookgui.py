@@ -72,7 +72,7 @@ class AddressBookFrame():
         self.buttonFrame.pack(side=tk.BOTTOM, pady=5)
         self.contactFrame.pack(side=tk.LEFT)
         self.EntryFrame.pack(side=tk.LEFT, padx=5)
-        self.cmdUpdateListbox()
+        self.cmdUpdateListbox(self.logic.contacts)
         self.contactPairs
 
     """function that is bound the the listbox selection"""
@@ -115,7 +115,7 @@ class AddressBookFrame():
         #add the contact to the address book
         self.logic.addContact(self.tempContact)
         #update the listbox
-        self.cmdUpdateListbox()
+        self.cmdUpdateListbox(self.logic.contacts)
 
     def cmdRemove(self):
         tmpSelection = self.contactsList.curselection()
@@ -142,6 +142,11 @@ class AddressBookFrame():
 
     def cmdSearch(self):
         print "Search"
+        query = self.entrySearch.get()
+        if query != "":
+            results=self.logic.generalSearchContacts(query)
+            if results == []:
+                self.cmdUpdateListbox(results)
 
     def cmdUpdate(self):
         print "Update"
@@ -163,22 +168,24 @@ class AddressBookFrame():
 
     def cmdClear(self):
         print "Clear"
+        self.entrySearch.delete(0,tk.END)
+        self.cmdUpdateListbox(self.logic.contacts)
 
     def cmdSortName(self):
         print "sort by last name"
         self.logic.sortByLname()
-        self.cmdUpdateListbox()
+        self.cmdUpdateListbox(self.logic.contacts)
 
     def cmdSortZIP(self):
         print "sort by ZIP"
         self.logic.sortByZip()
-        self.cmdUpdateListbox()
+        self.cmdUpdateListbox(self.logic.contacts)
 
-    def cmdUpdateListbox(self):
-        self.currentContacts = self.logic.contacts
+    def cmdUpdateListbox(self, contacts):
+        currentContacts = contacts
         self.contactPairs = {}
         self.contactsList.delete(0,tk.END)
-        for x in self.currentContacts:
+        for x in currentContacts:
             self.contactPairs[len(self.contactPairs)+1] = x
             tmpName = self.contactPairs[len(self.contactPairs)].fname + " " + self.contactPairs[len(self.contactPairs)].lname
             self.contactsList.insert(tk.END,tmpName)
