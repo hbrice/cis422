@@ -276,31 +276,31 @@ class AddressBookFrame():
         #Buttons/buttonFrame
         #############################
         self.btnAddContact = tk.Button(self.buttonFrame, text="Add", command=self.cmdAdd)
-        self.btnAddContact.grid(row=0, column=0, sticky=tk.W+tk.E)
+        self.btnAddContact.grid(row=3, column=0, sticky=tk.W+tk.E)
 
         self.btnRemoveContact = tk.Button(self.buttonFrame, text="Remove", command=self.cmdRemove)
-        self.btnRemoveContact.grid(row=0, column=1)
+        self.btnRemoveContact.grid(row=3, column=1, sticky=tk.W+tk.E)
 
         self.btnUpdateContact = tk.Button(self.buttonFrame, text="Update", command=self.cmdUpdate)
-        self.btnUpdateContact.grid(row=0, column=2)
+        self.btnUpdateContact.grid(row=3, column=2, sticky=tk.W+tk.E)
 
         self.btnSortName = tk.Button(self.buttonFrame, text="Sort, Name", command=self.cmdSortName)
-        self.btnSortName.grid(row=0,column=3, sticky=tk.W+tk.E)
+        self.btnSortName.grid(row=3,column=3, sticky=tk.W+tk.E)
 
         self.btnSortZIP = tk.Button(self.buttonFrame, text="Sort, ZIP", command=self.cmdSortZIP)
-        self.btnSortZIP.grid(row=0,column=4, sticky=tk.W+tk.E)
+        self.btnSortZIP.grid(row=2,column=3, sticky=tk.W+tk.E)
 
 
         #Search
-        self.entrySearch = tk.Entry(self.buttonFrame, width = 15)
-        self.entrySearch.grid(row=1,column=0)
+        self.entrySearch = tk.Entry(self.buttonFrame, width = 25)
+        self.entrySearch.grid(row=1,column=0, columnspan=2)
 
         self.btnSearch = tk.Button(self.buttonFrame, text="Search Name", command=self.cmdNameSearch)
-        self.btnSearch.grid(row=1,column=1, sticky=tk.W+tk.E)
+        self.btnSearch.grid(row=2,column=0, sticky=tk.W+tk.E)
 
         self.btnClear = tk.Button(self.buttonFrame, text="Clear", command=self.cmdClear)
-        self.btnClear.grid(row=1,column=2, sticky=tk.W+tk.E)
+        self.btnClear.grid(row=2,column=1, sticky=tk.W+tk.E)
 
         self.btnGeneralSearch = tk.Button(self.buttonFrame, text="General Search", command=self.cmdGeneralSearch)
-        self.btnGeneralSearch.grid(row=1,column=3, sticky=tk.W+tk.E)
+        self.btnGeneralSearch.grid(row=2,column=2, sticky=tk.W+tk.E)
 
