@@ -72,7 +72,7 @@ class AddressBookFrame():
         self.buttonFrame.pack(side=tk.BOTTOM, pady=5)
         self.contactFrame.pack(side=tk.LEFT)
         self.EntryFrame.pack(side=tk.LEFT, padx=5)
-        self.cmdUpdateListbox()
+        self.cmdUpdateListbox(self.logic.contacts)
         self.contactPairs
 
     """function that is bound the the listbox selection"""
@@ -82,82 +82,118 @@ class AddressBookFrame():
         tmpContact = self.contactPairs[index]
         self.entryName.delete(0,tk.END)
         self.entryName.insert(0, tmpContact.fname + " " + tmpContact.lname)
+
+        self.entryAddressLast.delete(0,tk.END)
+        self.entryAddressLast.insert(0, tmpContact.addressList[0].last)
+
+        self.entryAddressDelivery.delete(0,tk.END)
+        self.entryAddressDelivery.insert(0, tmpContact.addressList[0].delivery)
+
+        self.entryAddressSecond.delete(0,tk.END)
+        self.entryAddressSecond.insert(0, tmpContact.addressList[0].second)
+
         self.entryEmail.delete(0,tk.END)
-        self.entryEmail.insert(0, tmpContact.emailList[0])
+        if len(tmpContact.emailList) > 0:
+            self.entryEmail.insert(0, tmpContact.emailList[0])
+
         self.entryPhone.delete(0,tk.END)
-        self.entryPhone.insert(0, tmpContact.phoneNumberList[0])
+        if len(tmpContact.phoneNumberList) > 0:
+            self.entryPhone.insert(0, tmpContact.phoneNumberList[0])
 
 
     def cmdAdd(self):
         #create a new contact based on the contact's name
         self.tempContact = contact.contact(self.entryName.get())
         #build a temp address
-        self.tempAddress = address.address(self.entryAddress1.get(),self.entryName.get(),self.entryAddress2.get())
+        self.tempAddress = address.address(self.entryAddressLast.get(),self.entryAddressDelivery.get(),self.entryAddressSecond.get())
         #add the address to the contact object
         self.tempContact.addAddress(self.tempAddress)
+        #add the email address to the contact object
+        self.tempContact.addEmail(self.entryEmail.get())
         #get and add the phone number to the contact object
         self.tempContact.addPhoneNumber(self.entryPhone.get())
         #add the contact to the address book
         self.logic.addContact(self.tempContact)
         #update the listbox
-        self.cmdUpdateListbox()
+        self.cmdUpdateListbox(self.logic.contacts)
 
     def cmdRemove(self):
         tmpSelection = self.contactsList.curselection()
-        tmpIndex = int(tmpSelection[0])
-        tmpIndex=tmpIndex+1
-        print tmpIndex
-        if len(tmpSelection) > 1:
-            tkMessageBox.showinfo("Too Many!", "Too many entries selected, please remove one at a time.")
+        if len(tmpSelection) > 0:
+            tmpIndex = int(tmpSelection[0])
+            tmpIndex=tmpIndex+1
+            print tmpIndex
+            if len(tmpSelection) > 1:
+                tkMessageBox.showinfo("Too Many!", "Too many entries selected, please remove one at a time.")
+            else:
+                tempContact = self.contactPairs[tmpIndex]
+                #remove the contact
+                self.logic.removeContact(tempContact)
+
+                #clear all the entry boxes
+                self.entryAddress1.delete(0,tk.END)
+                self.entryAddress2.delete(0,tk.END)
+                self.entryEmail.delete(0,tk.END)
+                self.entryPhone.delete(0,tk.END)
+                self.entryName.delete(0,tk.END)
         else:
-            tempContact = self.contactPairs[tmpIndex]
-            #remove the contact
-            self.logic.removeContact(tempContact)
-
-            #clear all the entry boxes
-            self.entryAddress1.delete(0,tk.END)
-            self.entryAddress2.delete(0,tk.END)
-            self.entryEmail.delete(0,tk.END)
-            self.entryPhone.delete(0,tk.END)
-            self.entryName.delete(0,tk.END)
+            tkMessageBox.showinfo("Not enough!", "No entries selected.")
 
 
-    def cmdSearch(self):
-        print "Search"
+    def cmdNameSearch(self):
+        print "Name Search"
+        query = self.entrySearch.get()
+        if query != "":
+            results=self.logic.findContactByName(query)
+            if results == []:
+                self.cmdUpdateListbox(results)
+
+    def cmdGeneralSearch(self):
+        print "General Search"
+        query = self.entrySearch.get()
+        if query != "":
+            results=self.logic.generalSearchContacts(query)
+            if results == []:
+                self.cmdUpdateListbox(results)
 
     def cmdUpdate(self):
         print "Update"
         tmpSelection = self.contactsList.curselection()
-        tmpIndex = int(tmpSelection[0])
-        tmpIndex=tmpIndex+1
-        print tmpIndex
-        if len(tmpSelection) > 1:
-            tkMessageBox.showinfo("Too Many!", "Too many entries selected!")
+        if len(tmpSelection) > 0:
+            tmpIndex = int(tmpSelection[0])
+            tmpIndex=tmpIndex+1
+            print tmpIndex
+            if len(tmpSelection) > 1:
+                tkMessageBox.showinfo("Too Many!", "Too many entries selected, please update one at a time.")
+            else:
+                tempContact = self.contactPairs[tmpIndex]
+                #remove the contact
+                self.logic.removeContact(tempContact)
+                #add the contact back in with the updated info
+                self.cmdAdd()
         else:
-            tempContact = self.contactPairs[tmpIndex]
-            #remove the contact
-            self.logic.removeContact(tempContact)
-            #add the contact back in with the updated info
-            self.cmdAdd()
+            tkMessageBox.showinfo("Not enough!", "No entries selected.")
 
     def cmdClear(self):
         print "Clear"
+        self.entrySearch.delete(0,tk.END)
+        self.cmdUpdateListbox(self.logic.contacts)
 
     def cmdSortName(self):
         print "sort by last name"
         self.logic.sortByLname()
-        self.cmdUpdateListbox()
+        self.cmdUpdateListbox(self.logic.contacts)
 
     def cmdSortZIP(self):
         print "sort by ZIP"
         self.logic.sortByZip()
-        self.cmdUpdateListbox()
+        self.cmdUpdateListbox(self.logic.contacts)
 
-    def cmdUpdateListbox(self):
-        self.currentContacts = self.logic.contacts
+    def cmdUpdateListbox(self, contacts):
+        currentContacts = contacts
         self.contactPairs = {}
         self.contactsList.delete(0,tk.END)
-        for x in self.currentContacts:
+        for x in currentContacts:
             self.contactPairs[len(self.contactPairs)+1] = x
             tmpName = self.contactPairs[len(self.contactPairs)].fname + " " + self.contactPairs[len(self.contactPairs)].lname
             self.contactsList.insert(tk.END,tmpName)
@@ -202,58 +238,69 @@ class AddressBookFrame():
         self.entryName.grid(row=1,column=0)
 
         #Address line 1
-        self.labelAddress1 = tk.Label(self.EntryFrame, text="Address Line 1")
-        self.labelAddress1.grid(row=2,column=0)
+        self.labelAddressLast = tk.Label(self.EntryFrame, text="Last")
+        self.labelAddressLast.grid(row=2,column=0)
 
-        self.entryAddress1 = tk.Entry(self.EntryFrame)
-        self.entryAddress1.grid(row=3,column=0)
+        self.entryAddressLast = tk.Entry(self.EntryFrame)
+        self.entryAddressLast.grid(row=3,column=0)
 
         #Address line 2
-        self.labelAddress2 = tk.Label(self.EntryFrame, text="Address Line 2")
-        self.labelAddress2.grid(row=4,column=0)
+        self.labelAddressDelivery = tk.Label(self.EntryFrame, text="Delivery")
+        self.labelAddressDelivery.grid(row=4,column=0)
 
-        self.entryAddress2 = tk.Entry(self.EntryFrame)
-        self.entryAddress2.grid(row=5,column=0)
+        self.entryAddressDelivery = tk.Entry(self.EntryFrame)
+        self.entryAddressDelivery.grid(row=5,column=0)
+
+        #Address line 3
+        self.labelAddressSecond = tk.Label(self.EntryFrame, text="Second")
+        self.labelAddressSecond.grid(row=6,column=0)
+
+        self.entryAddressSecond = tk.Entry(self.EntryFrame)
+        self.entryAddressSecond.grid(row=7,column=0)
 
         #Email
         self.labelEmail = tk.Label(self.EntryFrame, text="Email Address")
-        self.labelEmail.grid(row=6,column=0)
+        self.labelEmail.grid(row=8,column=0)
 
         self.entryEmail = tk.Entry(self.EntryFrame)
-        self.entryEmail.grid(row=7,column=0)
+        self.entryEmail.grid(row=9,column=0)
 
         #Phone
         self.labelPhone = tk.Label(self.EntryFrame, text="Phone Number")
-        self.labelPhone.grid(row=8,column=0)
+        self.labelPhone.grid(row=10,column=0)
 
         self.entryPhone = tk.Entry(self.EntryFrame)
-        self.entryPhone.grid(row=9,column=0)
+        self.entryPhone.grid(row=11,column=0)
 
         #############################
         #Buttons/buttonFrame
         #############################
         self.btnAddContact = tk.Button(self.buttonFrame, text="Add", command=self.cmdAdd)
-        self.btnAddContact.grid(row=0, column=0, sticky=tk.W+tk.E)
+        self.btnAddContact.grid(row=3, column=0, sticky=tk.W+tk.E)
 
         self.btnRemoveContact = tk.Button(self.buttonFrame, text="Remove", command=self.cmdRemove)
-        self.btnRemoveContact.grid(row=0, column=1)
+        self.btnRemoveContact.grid(row=3, column=1, sticky=tk.W+tk.E)
 
         self.btnUpdateContact = tk.Button(self.buttonFrame, text="Update", command=self.cmdUpdate)
-        self.btnUpdateContact.grid(row=0, column=2)
+        self.btnUpdateContact.grid(row=3, column=2, sticky=tk.W+tk.E)
 
         self.btnSortName = tk.Button(self.buttonFrame, text="Sort, Name", command=self.cmdSortName)
-        self.btnSortName.grid(row=0,column=5, sticky=tk.W+tk.E)
+        self.btnSortName.grid(row=3,column=3, sticky=tk.W+tk.E)
 
         self.btnSortZIP = tk.Button(self.buttonFrame, text="Sort, ZIP", command=self.cmdSortZIP)
-        self.btnSortZIP.grid(row=1,column=5, sticky=tk.W+tk.E)
+        self.btnSortZIP.grid(row=2,column=3, sticky=tk.W+tk.E)
 
 
         #Search
-        self.entrySearch = tk.Entry(self.buttonFrame, width = 15)
-        self.entrySearch.grid(row=1,column=0)
+        self.entrySearch = tk.Entry(self.buttonFrame, width = 25)
+        self.entrySearch.grid(row=1,column=0, columnspan=2)
 
-        self.btnSearch = tk.Button(self.buttonFrame, text="Search", command=self.cmdSearch)
-        self.btnSearch.grid(row=1,column=1, sticky=tk.W+tk.E)
+        self.btnSearch = tk.Button(self.buttonFrame, text="Search Name", command=self.cmdNameSearch)
+        self.btnSearch.grid(row=2,column=0, sticky=tk.W+tk.E)
 
         self.btnClear = tk.Button(self.buttonFrame, text="Clear", command=self.cmdClear)
-        self.btnClear.grid(row=1,column=2, sticky=tk.W+tk.E)
+        self.btnClear.grid(row=2,column=1, sticky=tk.W+tk.E)
+
+        self.btnGeneralSearch = tk.Button(self.buttonFrame, text="General Search", command=self.cmdGeneralSearch)
+        self.btnGeneralSearch.grid(row=2,column=2, sticky=tk.W+tk.E)
+
