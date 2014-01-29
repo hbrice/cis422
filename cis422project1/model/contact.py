@@ -8,7 +8,6 @@ del path
 from address import address
 import tkMessageBox
 
-
 class contact:
     """docstring for contact"""
     def __init__(self, recipient):
@@ -55,6 +54,16 @@ class contact:
         output = name + "\n" + tmp + "\n" + emails + "\n" + phoneNumbers + "\n"
         return output
 
+    def __repr__(self):
+        name = self.fname + " " + self.lname
+        tmp = ""
+        for i in self.addressList:
+            tmp = tmp + str(i)
+        emails = ', '.join(self.emailList)
+        phoneNumbers = ', '.join(self.phoneNumberList)
+        output = name + "\n" + tmp + "\n" + emails + "\n" + phoneNumbers + "\n"
+        return output
+
     def __contains__(self, item):
         inName = ((item in self.fname) or (item in self.lname))
         inAddrList = False
@@ -77,38 +86,34 @@ class contact:
                 self.firstZip =  int(addr.zip)
             self.addressList.append(addr)
         else:
-            tkMessageBox.showinfo("Alert", "Address Already Added to This Contacts!")
+            tkMessageBox.showinfo("Alert", "Address Already Added to This Contacts!", icon='warning')
 
     def addEmail(self, email):
         if (email.lower() not in self.emailList):
             self.emailList.append(email)
         else:
-            tkMessageBox.showinfo("Alert", "Email Already added to this contact")
+            tkMessageBox.showinfo("Alert", "Email Already added to this contact", icon='warning')
 
     def addPhoneNumber(self, phoneNumber):
         if (phoneNumber not in self.phoneNumberList):
             self.phoneNumberList.append(phoneNumber)
         else:
-            tkMessageBox.showinfo("Alert", "Phone number already added to this contact")
+            tkMessageBox.showinfo("Alert", "Phone number already added to this contact", icon='warning')
 
     def removeAddress(self, addr):
         try:
             self.addressList.remove(addr)
         except ValueError:
-            tkMessageBox.showinfo("Alert", "Address not found!")
+            tkMessageBox.showinfo("Alert", "Address not found!", icon='warning')
 
     def removeEmail(self, email):
         try:
             self.emailList.remove(email)
         except ValueError:
-            tkMessageBox.showinfo("Alert", "Email not found!")
+            tkMessageBox.showinfo("Alert", "Email not found!", icon='warning')
 
     def removePhoneNumber(self, phoneNumber):
         try:
             self.phoneNumberList.remove(phoneNumber)
         except ValueError:
-            tkMessageBox.showinfo("Alert", "Phone Number not found!")
-
-
-
-
+            tkMessageBox.showinfo("Alert", "Phone Number not found!", icon='warning')

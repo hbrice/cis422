@@ -34,16 +34,18 @@ class addressbook:
     def findContactByName(self, recipient):
         tmp = contact(recipient)
         indices = [i for i, val in enumerate(self.contacts) if val == tmp]
+        contactList = []
         if (len(indices) > 1):
-             print("More than one contact found:")
-             for i in indices:
-                print(i, " ", self.contacts[indices[i]])
+            # This should be printed on the GUI
+            # print("More than one contact found:")
+            for i in indices:
+                contactList.append(self.contacts[i])
+            return contactList
         elif (len(indices) == 1):
-            print(self.contacts[indices[0]])
+            contact.append(self.contacts[indices[0]])
+            return contactList
         else:
-            # Use this for alert window
-            tkMessageBox.showinfo("Alert", "Contact Not Found!")
-            #print("Contact Not Found!")
+            tkMessageBox.showinfo("Alert", "Contact Not Found!", icon='warning')
 
     def generalSearchContacts(self, keyword):
         found = []
@@ -51,39 +53,23 @@ class addressbook:
             if keyword.lower() in i:
                 found.append(i)
         if (found == []):
-            tkMessageBox.showinfo("Alert", "No Matches Found!")
+            tkMessageBox.showinfo("Alert", "No Matches Found!", icon='warning')
+        return found
 
-    def removeContactByName(self, recipient):
-        tmp = contact(recipient)
-        indices = [i for i, val in enumerate(self.contacts) if val == tmp]
-        if (len(indices) > 1):
-            #print("More than one contact found:")
-            result = tkMessageBox.askquestion("Alert", "More Than One Contact Found, "
-                                                       "Please specify by index for the correct contact to delete. "
-                                                       "Or type 'all' to delete all contacts found:", icon='warning')
-            for i in indices:
-                print(i, " ", self.contacts[indices[i]])
-            if result != "all":
-                try:
-                    del self.contacts[result]
-                except ValueError:
-                    print("Not a correct index!")
-            else:
-                for i in indices:
-                    del self.contacts[indices[i]]
-        else:
-            del self.contacts[indices[0]]
+    def removeContact(self, contact):
+        #self.contacts.remove(contact)
+        indices = [i for i, val in enumerate(self.contacts) if val == contact]
+        for i in indices:
+            if (self.contacts[i].firstZip == contact.firstZip):
+                self.contacts.pop(i)
 
     def sortByLname(self):
         lnameSortList = sorted(self.contacts, key=attrgetter('lname'))
         self.contacts = lnameSortList
-        #print(lnameSortList)
 
     def sortByZip(self):
-        #zipList = [int(x.firstZip) for x in self.contacts]
         zipSortList = sorted(self.contacts, key=attrgetter('firstZip'))
         self.contacts = zipSortList
-        #print(zipSortList)
 
     def export(self, contacts, fileName):
         """Export a line for each contact in the list "contacts" using the specified tab seperated list

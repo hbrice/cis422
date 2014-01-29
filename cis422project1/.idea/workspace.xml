@@ -12,7 +12,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/cis422project1$addressBookTest.coverage" NAME="addressBookTest Coverage Results" MODIFIED="1390954942180" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
+    <SUITE FILE_PATH="coverage/cis422project1$addressBookTest.coverage" NAME="addressBookTest Coverage Results" MODIFIED="1391038046970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/cis422project1$addressTest.coverage" NAME="addressTest Coverage Results" MODIFIED="1390777915432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/view" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -26,25 +26,35 @@
     <groupTables value="false" />
     <sortChildren value="false" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="addressBookTest.py" pinned="false" current="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/test/addressBookTest.py">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state line="89" column="13" selection-start="3035" selection-end="3035" vertical-scroll-proportion="0.6561086" vertical-offset="844" max-vertical-offset="1760">
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="cis422project1" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="addressbook.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="addressbook.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/addressbook.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="0" selection-start="1663" selection-end="1663" vertical-scroll-proportion="0.0" vertical-offset="684" max-vertical-offset="1952">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contactTest.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/contactTest.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="22" selection-start="1259" selection-end="1259" vertical-scroll-proportion="0.5520548" vertical-offset="285" max-vertical-offset="1040">
+            <state line="53" column="31" selection-start="1647" selection-end="1647" vertical-scroll-proportion="-0.17248061" vertical-offset="937" max-vertical-offset="1728">
               <folding />
             </state>
           </provider>
@@ -53,16 +63,7 @@
       <file leaf-file-name="contact.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/contact.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="17" selection-start="2201" selection-end="2201" vertical-scroll-proportion="0.0" vertical-offset="1136" max-vertical-offset="1920">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="address.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/address.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="29" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0" vertical-offset="192" max-vertical-offset="656">
+            <state line="119" column="0" selection-start="4051" selection-end="4051" vertical-scroll-proportion="0.0" vertical-offset="32" max-vertical-offset="2000">
               <folding />
             </state>
           </provider>
@@ -89,6 +90,7 @@
         <option value="$PROJECT_DIR$/test/contactTest.py" />
         <option value="$PROJECT_DIR$/model/address.py" />
         <option value="$PROJECT_DIR$/model/addressbooks.py" />
+        <option value="$PROJECT_DIR$/model/primaryKeys.py" />
         <option value="$PROJECT_DIR$/model/contact.py" />
         <option value="$PROJECT_DIR$/test/addressBookTest.py" />
         <option value="$PROJECT_DIR$/model/addressbook.py" />
@@ -96,10 +98,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="826" />
-    <option name="y" value="237" />
-    <option name="width" value="1358" />
-    <option name="height" value="878" />
+    <option name="x" value="494" />
+    <option name="y" value="56" />
+    <option name="width" value="1380" />
+    <option name="height" value="1016" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -127,6 +129,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -155,25 +158,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
+              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="reference.settings.ide.settings.web.browsers" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/test/addressBookTest.py" />
+    <property name="options.lastSelected" value="reference.settings.ide.settings.web.browsers" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/test/addressBookTest.py" />
     <property name="FullScreen" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager" selected="Python.addressBookTest">
     <configuration default="false" name="addressBookTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -298,6 +300,9 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -319,9 +324,6 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -405,7 +407,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="826" y="237" width="1358" height="878" extended-state="0" />
+    <frame x="494" y="56" width="1380" height="1016" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -413,11 +415,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32958034" sideWeight="0.49959904" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3282626" sideWeight="0.71813285" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24963072" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15396342" sideWeight="0.60686016" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15367316" sideWeight="0.60714287" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31236896" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39313984" sideWeight="0.4992378" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39285713" sideWeight="0.4992378" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -440,23 +442,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/model/address.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="36" selection-start="106" selection-end="106" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="224">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="831" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="854" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="854" />
@@ -477,11 +462,6 @@
         <state line="11" column="20" selection-start="377" selection-end="377" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="464" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/addressbooks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="352" selection-end="352" vertical-scroll-proportion="0.13375796" vertical-offset="124" max-vertical-offset="752" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/addressbooksgui.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="31" column="22" selection-start="887" selection-end="887" vertical-scroll-proportion="0.050955415" vertical-offset="352" max-vertical-offset="2448" />
@@ -497,6 +477,34 @@
         <state line="11" column="17" selection-start="279" selection-end="287" vertical-scroll-proportion="0.22929937" vertical-offset="0" max-vertical-offset="628" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/contactTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="22" selection-start="1259" selection-end="1259" vertical-scroll-proportion="0.59447" vertical-offset="172" max-vertical-offset="1040">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharm30/python_stubs/-492936346/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="665" column="8" selection-start="24414" selection-end="24414" vertical-scroll-proportion="0.0" vertical-offset="11028" max-vertical-offset="89856">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="112">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/addressbooks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="0" selection-start="352" selection-end="352" vertical-scroll-proportion="0.4031008" vertical-offset="0" max-vertical-offset="752">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/model/address.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="29" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0" vertical-offset="28" max-vertical-offset="656">
@@ -504,28 +512,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/contact.py">
+    <entry file="file://$PROJECT_DIR$/test/addressBookTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="17" selection-start="2201" selection-end="2201" vertical-scroll-proportion="0.0" vertical-offset="864" max-vertical-offset="1920">
+        <state line="89" column="13" selection-start="3035" selection-end="3035" vertical-scroll-proportion="0.6561086" vertical-offset="844" max-vertical-offset="1760">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/addressBookTest.py">
+    <entry file="file://$PROJECT_DIR$/model/contact.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="27" selection-start="2427" selection-end="2427" vertical-scroll-proportion="0.79186994" vertical-offset="713" max-vertical-offset="1392" />
+        <state line="119" column="0" selection-start="4051" selection-end="4051" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2000">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/addressbook.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="0" selection-start="1663" selection-end="1663" vertical-scroll-proportion="0.0" vertical-offset="684" max-vertical-offset="1952">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/contactTest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="22" selection-start="1259" selection-end="1259" vertical-scroll-proportion="0.5520548" vertical-offset="285" max-vertical-offset="1040">
+        <state line="53" column="31" selection-start="1647" selection-end="1647" vertical-scroll-proportion="-0.17248061" vertical-offset="937" max-vertical-offset="1728">
           <folding />
         </state>
       </provider>
