@@ -119,22 +119,25 @@ class AddressBookFrame():
 
     def cmdRemove(self):
         tmpSelection = self.contactsList.curselection()
-        tmpIndex = int(tmpSelection[0])
-        tmpIndex=tmpIndex+1
-        print tmpIndex
-        if len(tmpSelection) > 1:
-            tkMessageBox.showinfo("Too Many!", "Too many entries selected, please remove one at a time.")
-        else:
-            tempContact = self.contactPairs[tmpIndex]
-            #remove the contact
-            self.logic.removeContact(tempContact)
+        if len(tmpSelection) > 0:
+            tmpIndex = int(tmpSelection[0])
+            tmpIndex=tmpIndex+1
+            print tmpIndex
+            if len(tmpSelection) > 1:
+                tkMessageBox.showinfo("Too Many!", "Too many entries selected, please remove one at a time.")
+            else:
+                tempContact = self.contactPairs[tmpIndex]
+                #remove the contact
+                self.logic.removeContact(tempContact)
 
-            #clear all the entry boxes
-            self.entryAddress1.delete(0,tk.END)
-            self.entryAddress2.delete(0,tk.END)
-            self.entryEmail.delete(0,tk.END)
-            self.entryPhone.delete(0,tk.END)
-            self.entryName.delete(0,tk.END)
+                #clear all the entry boxes
+                self.entryAddress1.delete(0,tk.END)
+                self.entryAddress2.delete(0,tk.END)
+                self.entryEmail.delete(0,tk.END)
+                self.entryPhone.delete(0,tk.END)
+                self.entryName.delete(0,tk.END)
+        else:
+            tkMessageBox.showinfo("Not enough!", "No entries selected.")
 
 
     def cmdSearch(self):
@@ -143,17 +146,20 @@ class AddressBookFrame():
     def cmdUpdate(self):
         print "Update"
         tmpSelection = self.contactsList.curselection()
-        tmpIndex = int(tmpSelection[0])
-        tmpIndex=tmpIndex+1
-        print tmpIndex
-        if len(tmpSelection) > 1:
-            tkMessageBox.showinfo("Too Many!", "Too many entries selected!")
+        if len(tmpSelection) > 0:
+            tmpIndex = int(tmpSelection[0])
+            tmpIndex=tmpIndex+1
+            print tmpIndex
+            if len(tmpSelection) > 1:
+                tkMessageBox.showinfo("Too Many!", "Too many entries selected, please update one at a time.")
+            else:
+                tempContact = self.contactPairs[tmpIndex]
+                #remove the contact
+                self.logic.removeContact(tempContact)
+                #add the contact back in with the updated info
+                self.cmdAdd()
         else:
-            tempContact = self.contactPairs[tmpIndex]
-            #remove the contact
-            self.logic.removeContact(tempContact)
-            #add the contact back in with the updated info
-            self.cmdAdd()
+            tkMessageBox.showinfo("Not enough!", "No entries selected.")
 
     def cmdClear(self):
         print "Clear"
