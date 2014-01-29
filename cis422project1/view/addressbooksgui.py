@@ -8,6 +8,7 @@ from view import addressbookgui
 import sys
 from model import addressbooks
 from model import addressbook
+import tkMessageBox
 
 class AddressBooksFrame():
 
@@ -102,6 +103,7 @@ class AddressBooksFrame():
 
     #action for File-->New
     def cmdNew(self):
+
         try:
             #display dialog for new file
              self.newFileName = asksaveasfilename()
