@@ -87,7 +87,6 @@ class AddressBookFrame():
         self.entryPhone.insert(0, tmpContact.phoneNumberList[0])
 
 
-
     def cmdAdd(self):
         #create a new contact based on the contact's name
         self.tempContact = contact.contact(self.entryName.get())
@@ -99,20 +98,27 @@ class AddressBookFrame():
         self.tempContact.addPhoneNumber(self.entryPhone.get())
         #add the contact to the address book
         self.logic.addContact(self.tempContact)
-        #add the contact to the contact listbox
-        self.contactsList.insert(0,self.entryName.get())
+        #update the listbox
+        self.cmdUpdateListbox()
 
     def cmdRemove(self):
-        #remove the selected contact from the address book
-        self.logic.removeContactByName(self.contactsList.get(tk.ACTIVE))
-        #remove the selected contact from the list box
-        self.contactsList.delete(self.contactsList.index(tk.ACTIVE))
-        #clear all the entry boxes
-        self.entryAddress1.delete(0,tk.END)
-        self.entryAddress2.delete(0,tk.END)
-        self.entryEmail.delete(0,tk.END)
-        self.entryPhone.delete(0,tk.END)
-        self.entryName.delete(0,tk.END)
+        tmpSelection = self.contactsList.curselection()
+        tmpIndex = int(tmpSelection[0])
+        tmpIndex=tmpIndex+1
+        print tmpIndex
+        if len(tmpSelection) > 1:
+            tkMessageBox.showinfo("Too Many!", "Too many entries selected, please remove one at a time.")
+        else:
+            tempContact = self.contactPairs[tmpIndex]
+            #remove the contact
+            self.logic.removeContact(tempContact)
+
+            #clear all the entry boxes
+            self.entryAddress1.delete(0,tk.END)
+            self.entryAddress2.delete(0,tk.END)
+            self.entryEmail.delete(0,tk.END)
+            self.entryPhone.delete(0,tk.END)
+            self.entryName.delete(0,tk.END)
 
 
     def cmdSearch(self):
@@ -120,7 +126,6 @@ class AddressBookFrame():
 
     def cmdUpdate(self):
         print "Update"
-        #self.tempContact = self.logic.findContactByName(self.entryName.get())
         tmpSelection = self.contactsList.curselection()
         tmpIndex = int(tmpSelection[0])
         tmpIndex=tmpIndex+1
@@ -129,19 +134,28 @@ class AddressBookFrame():
             tkMessageBox.showinfo("Too Many!", "Too many entries selected!")
         else:
             tempContact = self.contactPairs[tmpIndex]
-            print tempContact
+            #remove the contact
+            self.logic.removeContact(tempContact)
+            #add the contact back in with the updated info
+            self.cmdAdd()
 
     def cmdClear(self):
         print "Clear"
 
     def cmdSortName(self):
-        print "sort by name"
+        print "sort by last name"
+        self.logic.sortByLname()
+        self.cmdUpdateListbox()
 
     def cmdSortZIP(self):
         print "sort by ZIP"
+        self.logic.sortByZip()
+        self.cmdUpdateListbox()
 
     def cmdUpdateListbox(self):
         self.currentContacts = self.logic.contacts
+        self.contactPairs = {}
+        self.contactsList.delete(0,tk.END)
         for x in self.currentContacts:
             self.contactPairs[len(self.contactPairs)+1] = x
             tmpName = self.contactPairs[len(self.contactPairs)].fname + " " + self.contactPairs[len(self.contactPairs)].lname
