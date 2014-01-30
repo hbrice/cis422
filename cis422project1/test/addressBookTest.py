@@ -52,7 +52,7 @@ def main():
     testContact3.addEmail(testEmail3_2)
     testContact3.addPhoneNumber(testPhoneNumber3)
 
-    testContact4 = contact("John Evan Doe")
+    testContact4 = contact("John Evan")
     testLast4 = "Hollywood CA 97801"
     testDelivery4 = "1401 Xavier St."
     testSecond4 = "Apt 14"
@@ -82,8 +82,8 @@ def main():
     #print(testContact1 == testContact4)
     testAddressBook.removeContact(testContact1)
     print(testAddressBook)
-    print(testContact4.fname)
-    print(testContact4.lname)
+    print(testContact1.cid == testContact3.cid)
+    print(testContact4.cid)
     #tmp2 = testAddressBook.generalSearchContacts("John")
     #print(tmp2)
     #testAddressBook.removeContactByName("John Doe")
