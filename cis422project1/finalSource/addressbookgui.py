@@ -6,14 +6,18 @@ import addressbook
 import contact
 import address
 import tkMessageBox
-# noinspection PyInterpreter
+
+"""AddressBookFrame represents the internal frame within an address book, it ties together the addressbook backend and the GUI"""
 class AddressBookFrame():
 
     def __init__(self, master, addressBookLogic):
 
+        """these variables will be used to monitor states for both the entry boxes and the addressbook
+        to make sure information dosen't get lost without the user knowing"""
         self.unSavedChanges = 0
         self.unUpdated = 0
 
+        """these variables will be bound to the entry boxes """
         self.svName = tk.StringVar()
         self.svLast = tk.StringVar()
         self.svDelivery = tk.StringVar()
@@ -21,6 +25,7 @@ class AddressBookFrame():
         self.svEmail = tk.StringVar()
         self.svPhone = tk.StringVar()
 
+        """set traces for each entryboxe variable and the action event is to call entryChanged"""
         self.svName.trace("w", self.entryChanged)
         self.svLast.trace("w", self.entryChanged)
         self.svDelivery.trace("w", self.entryChanged)
@@ -28,70 +33,33 @@ class AddressBookFrame():
         self.svEmail.trace("w", self.entryChanged)
         self.svPhone.trace("w", self.entryChanged)
 
-
-        testContact1 = contact.contact("John Doe")
-        testLast1 = "Alameda CA 9"
-        testDelivery1 = "1401 SW Main St."
-        testSecond1 = "Apt 4"
-        testAddr1 = address.address(testLast1, testDelivery1, testSecond1)
-        testEmail1 = "jdoe@gmail.com"
-        testEmail2 = "doe@uoregon.edu"
-        testPhoneNumber1 = "542-345-6745"
-        testContact1.addAddress(testAddr1)
-        testContact1.addEmail(testEmail1)
-        testContact1.addEmail(testEmail2)
-        testContact1.addPhoneNumber(testPhoneNumber1)
-
-        testContact2 = contact.contact("Mary Sue")
-        testLast2 = "Venice CA 1"
-        testDelivery2 = "56 Trent St."
-        testSecond2 = ""
-        testAddr2 = address.address(testLast2, testDelivery2, testSecond2)
-        testEmail2_1 = "marys@gmail.com"
-        testEmail2_2 = "msue@uoregon.edu"
-        testPhoneNumber2 = "542-524-5820"
-        testContact2.addAddress(testAddr2)
-        testContact2.addEmail(testEmail2_1)
-        testContact2.addEmail(testEmail2_2)
-        testContact2.addPhoneNumber(testPhoneNumber2)
-
-        testContact3 = contact.contact("Eddy Adams")
-        testLast3 = "Oakland CA 0"
-        testDelivery3 = "345 Alder St."
-        testSecond3 = ""
-        testAddr3 = address.address(testLast3, testDelivery3, testSecond3)
-        testEmail3_1 = "erodgers@gmail.com"
-        testEmail3_2 = "reddy@uoregon.edu"
-        testPhoneNumber3 = "233-595-9090"
-        testContact3.addAddress(testAddr3)
-        testContact3.addEmail(testEmail3_1)
-        testContact3.addEmail(testEmail3_2)
-        testContact3.addPhoneNumber(testPhoneNumber3)
-
-        #addressBookLogic.addContact(testContact1)
-        #addressBookLogic.addContact(testContact2)
-        #addressBookLogic.addContact(testContact3)
-
+        """keep a record of the calling object"""
         self.master = master
 
+        """setup the outermost frame (frame container) & add draw it to master, this will hold the three internal frames"""
         self.frame = tk.Frame(self.master)
         self.frame.grid(row=0,column=0)
+
+        """add the three sub frames to the frame container"""
         self.contactFrame = tk.Frame(self.frame)
         self.EntryFrame = tk.Frame(self.frame)
         self.buttonFrame = tk.Frame(self.frame)
 
-        self.entryChanged = 0
-
+        """internal referance to the addressbook object"""
         self.logic = addressBookLogic #run
-        #self.logic = addressbook.addressbook #code
 
+        """setup all the widgets on the frames"""
         self.initUI()
+
+        """arrange & draw the three frames"""
         self.buttonFrame.pack(side=tk.BOTTOM, pady=5)
         self.contactFrame.pack(side=tk.LEFT)
         self.EntryFrame.pack(side=tk.LEFT, padx=5)
-        self.cmdUpdateListbox(self.logic.contacts)
-        self.contactPairs
 
+        """lastly, update the listbox of contacts"""
+        self.cmdUpdateListbox(self.logic.contacts)
+
+    """check for unsaved changes to a selected contact, prombt to user is they're sure, return response"""
     def checkUpdated(self):
         if self.unUpdated == 1:
             result = tkMessageBox.askquestion("Unsaved","You have unsaved changes for the selected contact, are you sure you want to continue?")
@@ -102,18 +70,29 @@ class AddressBookFrame():
                 self.unUpdated = 0
         return 1
 
-
+    """anytime a entrybox is changed, set the state for unUpdated"""
     def entryChanged(self, *args):
         self.unUpdated = 1
 
     """function that is bound the the listbox selection"""
     def onSelect(self, evt):
+        """if the user dosen't want to lose unsaved changes, don't continue"""
         if self.checkUpdated() == 0:
             return
 
+        """get the widget that triggered the event"""
         w = evt.widget
+
+        """if there's no contacts in the list don't try & just return"""
+        if len(w.curselection()) <= 0:
+            return
+
+        """get the selected item and add one"""
         index = int(w.curselection()[0]) + 1
+        """get the contact object from the name-value pair"""
         tmpContact = self.contactPairs[index]
+
+        """clear and update all of the contact entryboxes with the selected object information"""
         self.entryName.delete(0,tk.END)
         self.entryName.insert(0, tmpContact.fname + " " + tmpContact.lname)
 
@@ -127,48 +106,55 @@ class AddressBookFrame():
         self.entryAddressSecond.insert(0, tmpContact.addressList[0].second)
 
         self.entryEmail.delete(0,tk.END)
+        """if there's an email, add it"""
         if len(tmpContact.emailList) > 0:
             self.entryEmail.insert(0, tmpContact.emailList[0])
 
         self.entryPhone.delete(0,tk.END)
+        """if there's a phone number, add it"""
         if len(tmpContact.phoneNumberList) > 0:
             self.entryPhone.insert(0, tmpContact.phoneNumberList[0])
-
+        """set the state to no unUpdated changes"""
         self.unUpdated = 0
 
 
     def cmdAdd(self):
-        #create a new contact based on the contact's name
+        """create a new contact based on the contact's name"""
         self.tempContact = contact.contact(self.entryName.get())
-        #build a temp address
+        """build a temp address"""
         self.tempAddress = address.address(self.entryAddressLast.get(),self.entryAddressDelivery.get(),self.entryAddressSecond.get())
-        #add the address to the contact object
+        """add the address to the contact object"""
         self.tempContact.addAddress(self.tempAddress)
-        #add the email address to the contact object
+        """add the email address to the contact object"""
         self.tempContact.addEmail(self.entryEmail.get())
-        #get and add the phone number to the contact object
+        """get and add the phone number to the contact object"""
         self.tempContact.addPhoneNumber(self.entryPhone.get())
-        #add the contact to the address book
+        """add the contact to the address book"""
         self.logic.addContact(self.tempContact)
-        #update the listbox
+        """update the listbox"""
         self.cmdUpdateListbox(self.logic.contacts)
 
+        """set the addressbook state to unsaved"""
         self.unSavedChanges = 1
 
+    """function called when the remove button is clicked"""
     def cmdRemove(self):
+        """get the current selection"""
         tmpSelection = self.contactsList.curselection()
+        """if there's at least one contact selected"""
         if len(tmpSelection) > 0:
             tmpIndex = int(tmpSelection[0])
             tmpIndex=tmpIndex+1
-            print tmpIndex
+            """if more than once contact is selected display error"""
             if len(tmpSelection) > 1:
                 tkMessageBox.showinfo("Too Many!", "Too many entries selected, please remove one at a time.")
             else:
+                """get the contact from the name-value pairs"""
                 tempContact = self.contactPairs[tmpIndex]
-                #remove the contact
+                """remove the contact"""
                 self.logic.removeContact(tempContact)
 
-                #clear all the entry boxes
+                """clear all the entry boxes"""
                 self.entryAddressSecond.delete(0,tk.END)
                 self.entryAddressDelivery.delete(0,tk.END)
                 self.entryAddressLast.delete(0,tk.END)
@@ -178,68 +164,83 @@ class AddressBookFrame():
                 self.cmdUpdateListbox(self.logic.contacts)
                 self.unSavedChanges = 1
         else:
+            """if no contacts selected"""
             tkMessageBox.showinfo("Not enough!", "No entries selected.")
 
-
     def cmdNameSearch(self):
+        """if the user dosen't want to lose unsaved changes, don't continue"""
         if self.checkUpdated() == 0:
             return
-
-        print "Name Search"
+        """store the query"""
         query = self.entrySearch.get()
+        """if it's not blank, call the address book which will return a contacts list"""
         if query != "":
             results=self.logic.findContactByName(query)
+            """if there's results"""
             if results != []:
+                """update with the returned results"""
                 self.cmdUpdateListbox(results)
             else:
+                """else display nothing"""
                 self.cmdClearListBox
 
 
     def cmdGeneralSearch(self):
+        """if the user dosen't want to lose unsaved changes, don't continue"""
         if self.checkUpdated() == 0:
             return
-
-        print "General Search"
+        """store the query"""
         query = self.entrySearch.get()
+        """if it's not blank, call the address book which will return a contacts list"""
         if query != "":
             results=self.logic.generalSearchContacts(query)
+            """if there's results"""
             if results != []:
+                """update with the returned results"""
                 self.cmdUpdateListbox(results)
             else:
+                """else display nothing"""
                 self.cmdClearListBox
 
+    """update a contact"""
     def cmdUpdate(self):
-        print "Update"
+        """get the selection and verify there's 1 selected"""
         tmpSelection = self.contactsList.curselection()
         if len(tmpSelection) > 0:
+            """make sure there's just one selected"""
             tmpIndex = int(tmpSelection[0])
             tmpIndex=tmpIndex+1
-            print tmpIndex
             if len(tmpSelection) > 1:
                 tkMessageBox.showinfo("Too Many!", "Too many entries selected, please update one at a time.")
             else:
+                """save the contact"""
                 tempContact = self.contactPairs[tmpIndex]
-                #remove the contact
+                """remove the contact"""
                 self.logic.removeContact(tempContact)
-                #add the contact back in with the updated info
+                """add the contact back in with the updated info"""
                 self.cmdAdd()
+                """addressbook is now unsaved"""
                 self.unSavedChanges = 1
         else:
             tkMessageBox.showinfo("Not enough!", "No entries selected.")
 
+    """cmd to clear search results"""
     def cmdClear(self):
+        """if the user dosen't want to lose unsaved changes, don't continue"""
         if self.checkUpdated() == 0:
             return
-
-        print "Clear"
+        """clear the search box"""
         self.entrySearch.delete(0,tk.END)
+        """update the listbox with the full list of contacts"""
         self.cmdUpdateListbox(self.logic.contacts)
 
+    """clear the entry boxes in preperation to add a new contact"""
     def cmdClearContact(self):
+        """if the user dosen't want to lose unsaved changes, don't continue"""
         if self.checkUpdated() == 0:
             return
 
-        #clear all the entry boxes
+        """clear all the entry boxes"""
         self.entryAddressSecond.delete(0,tk.END)
         self.entryAddressDelivery.delete(0,tk.END)
         self.entryAddressLast.delete(0,tk.END)
@@ -247,40 +248,58 @@ class AddressBookFrame():
         self.entryPhone.delete(0,tk.END)
         self.entryName.delete(0,tk.END)
 
+    """call the addressbook sortByName and update GUI"""
     def cmdSortName(self):
+        """if the user dosen't want to lose unsaved changes, don't continue"""
         if self.checkUpdated() == 0:
             return
-
-        print "sort by last name"
+        """sort by last name"""
         self.logic.sortByLname()
+        """update the listbox"""
         self.cmdUpdateListbox(self.logic.contacts)
 
+    """calls the addressbook sortByZip and updates GUI"""
     def cmdSortZIP(self):
+        """if the user dosen't want to lose unsaved changes, don't continue"""
         if self.checkUpdated() == 0:
             return
-
-        print "sort by ZIP"
+        """sort by zip"""
         self.logic.sortByZip()
+        """update the listbox"""
         self.cmdUpdateListbox(self.logic.contacts)
 
+    """empty all items in the listbox"""
     def cmdClearListBox(self):
+        """if the user dosen't want to lose unsaved changes, don't continue"""
         if self.checkUpdated() == 0:
             return
+        """clear the listbox"""
         self.contactsList.delete(0,tk.END)
 
+    """refresh the contactListBox"""
     def cmdUpdateListbox(self, contacts):
         currentContacts = contacts
+        """clear the name-value pairs and the listbox"""
         self.contactPairs = {}
         self.contactsList.delete(0,tk.END)
+        """try to itterate through currentConacts, if no contacts just clear the listbox"""
         try:
             for x in currentContacts:
+                """add a contact to the name-value pair"""
                 self.contactPairs[len(self.contactPairs)+1] = x
+                """build the name for display"""
                 tmpName = self.contactPairs[len(self.contactPairs)].fname + " " + self.contactPairs[len(self.contactPairs)].lname
+                """insert the contact to the listbox"""
                 self.contactsList.insert(tk.END,tmpName)
         except TypeError:
+            """empty the listbox"""
             self.contactsList.delete(0,tk.END)
+
+        """set unUpdated to 0"""
         self.unUpdated = 0
 
+
+    """draw all the widgets in the correct place on their frames"""
     def initUI(self):
         #############################
         #Contact List/contactFrame
