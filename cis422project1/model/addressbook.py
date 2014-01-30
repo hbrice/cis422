@@ -42,7 +42,7 @@ class addressbook:
                 contactList.append(self.contacts[i])
             return contactList
         elif (len(indices) == 1):
-            contact.append(self.contacts[indices[0]])
+            contactList.append(self.contacts[indices[0]])
             return contactList
         else:
             tkMessageBox.showinfo("Alert", "Contact Not Found!", icon='warning')
@@ -60,7 +60,7 @@ class addressbook:
         #self.contacts.remove(contact)
         indices = [i for i, val in enumerate(self.contacts) if val == contact]
         for i in indices:
-            if (self.contacts[i].firstZip == contact.firstZip):
+            if (self.contacts[i].cid == contact.cid):
                 self.contacts.pop(i)
 
     def sortByLname(self):

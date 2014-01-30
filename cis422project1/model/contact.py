@@ -5,8 +5,10 @@ path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../model'))
 if not path in sys.path:
     sys.path.insert(1, path)
 del path
+
 from address import address
 import tkMessageBox
+import uuid
 
 class contact:
     """docstring for contact"""
@@ -29,6 +31,7 @@ class contact:
         self.firstZip = 0
         self.emailList = []
         self.phoneNumberList = []
+        self.cid = uuid.uuid1()
 
     def addField(self, name, value):
         # create local fget and fset functions
