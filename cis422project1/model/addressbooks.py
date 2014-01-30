@@ -20,6 +20,9 @@ class addressbooks:
 
     def addAddressBook(self, addrBook):
         self.addressBooksList.append(addrBook)
+
+    def mergeAddressBooks(self, otherAddressBook):
+        return list(set(self.addressBooksList) | set(otherAddressBook))
     
     """Save: Function for saving an addressbooks instance.
     The arguments are a file name, and an overwrite flag. If no flag is passed 

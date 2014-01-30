@@ -63,6 +63,10 @@ class addressbook:
             if (self.contacts[i].cid == contact.cid):
                 self.contacts.pop(i)
 
+    def mergeAddressBook(self, otherAddressBook):
+        for i in otherAddressBook.contacts:
+            self.addContact(i)
+
     def sortByLname(self):
         lnameSortList = sorted(self.contacts, key=attrgetter('lname'))
         self.contacts = lnameSortList

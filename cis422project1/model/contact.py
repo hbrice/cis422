@@ -9,6 +9,7 @@ del path
 from address import address
 import tkMessageBox
 import uuid
+import re
 
 class contact:
     """docstring for contact"""
@@ -99,10 +100,23 @@ class contact:
         else:
             return True
 
+    def checkPhone(self, number):
+        nums = ''.join(x for x in number if x.isdigit())
+        if (len(nums) == 10):
+            return True
+        else: return False
+
+    def checkZip(self, zip):
+        if(zip.isdigit()):
+            return True
+        else:
+            tkMessageBox.showinfo("Alert", "Zip needs to be an Integer!", icon='warning')
+
     def addAddress(self, addr):
         if (addr not in self.addressList):
             if (self.addressList == []):
-                self.firstZip =  int(addr.zip)
+                if(self.checkZip(addr.zip)):
+                    self.firstZip =  int(addr.zip)
             self.addressList.append(addr)
         else:
             tkMessageBox.showinfo("Alert", "Address Already Added to This Contacts!", icon='warning')
@@ -114,10 +128,13 @@ class contact:
             tkMessageBox.showinfo("Alert", "Email Already added to this contact", icon='warning')
 
     def addPhoneNumber(self, phoneNumber):
-        if (phoneNumber not in self.phoneNumberList):
-            self.phoneNumberList.append(phoneNumber)
+        if(self.checkPhone(phoneNumber)):
+            if (phoneNumber not in self.phoneNumberList):
+                self.phoneNumberList.append(phoneNumber)
+            else:
+                tkMessageBox.showinfo("Alert", "Phone number already added to this contact", icon='warning')
         else:
-            tkMessageBox.showinfo("Alert", "Phone number already added to this contact", icon='warning')
+            tkMessageBox.showinfo("Alert", "Phone number is not valid", icon='warning')
 
     def removeAddress(self, addr):
         try:

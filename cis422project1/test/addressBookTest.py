@@ -6,6 +6,7 @@ if not path in sys.path:
     sys.path.insert(1, path)
 del path
 
+from addressbooks import addressbooks
 from addressbook import addressbook
 from contact import contact
 from address import address
@@ -70,6 +71,46 @@ def main():
     testAddressBook.addContact(testContact3)
     testAddressBook.addContact(testContact4)
 
+    #testAddrBooks = addressbooks()
+    #testAddrBooks.addAddressBook(testAddressBook)
+
+    testContact5 = contact("George Simon")
+    testLast5 = "Eugene OR 94701"
+    testDelivery5 = "1401 SW Main St."
+    testSecond5 = "Apt 6"
+    testAddr5 = address(testLast5, testDelivery5, testSecond5)
+    testEmail5_1 = "simon@gmail.com"
+    testEmail5_2 = "gsimon@uoregon.edu"
+    testPhoneNumber5 = "542-111-2345"
+    testContact5.addAddress(testAddr5)
+    testContact5.addEmail(testEmail5_1)
+    testContact5.addEmail(testEmail5_2)
+    testContact5.addPhoneNumber(testPhoneNumber5)
+
+    testContact6 = contact("Ben Foreman")
+    testLast6 = "Tempei WA 94401"
+    testDelivery6 = "1403 West St."
+    testSecond6 = ""
+    testAddr6 = address(testLast6, testDelivery6, testSecond6)
+    testEmail6_1 = "bforeman@gmail.com"
+    testEmail6_2 = "benf@uoregon.edu"
+    testPhoneNumber6 = "542-322-1901"
+    testContact6.addAddress(testAddr6)
+    testContact6.addEmail(testEmail6_1)
+    testContact6.addEmail(testEmail6_2)
+    testContact6.addPhoneNumber(testPhoneNumber6)
+
+    print(testContact5)
+    print(testContact6)
+
+    testAddressBook2 = addressbook()
+    testAddressBook2.addContact(testContact5)
+    testAddressBook2.addContact(testContact6)
+    testAddressBook.mergeAddressBook(testAddressBook2)
+
+    print(testAddressBook)
+
+
 
     #testAddressBook.generalSearchContacts(".edu")
     #print(testContact1)
@@ -80,10 +121,10 @@ def main():
     #tmp = testAddressBook.findContactByName("John Doe")
     #print(tmp)
     #print(testContact1 == testContact4)
-    testAddressBook.removeContact(testContact1)
-    print(testAddressBook)
-    print(testContact1.cid == testContact3.cid)
-    print(testContact4.cid)
+    #testAddressBook.removeContact(testContact1)
+    #print(testAddressBook)
+    #print(testContact1.cid == testContact3.cid)
+    #print(testContact4.cid)
     #tmp2 = testAddressBook.generalSearchContacts("John")
     #print(tmp2)
     #testAddressBook.removeContactByName("John Doe")
@@ -98,9 +139,7 @@ def main():
     # testAddressBook.generalSearchContacts("SW2")
     # THIS WORKS!!
     #testAddressBook.removeContactByName("John Doe")
-    #print(testAddressBook)'''
-
-
+    #print(testAddressBook)
 
 if __name__ == '__main__':
     main()
