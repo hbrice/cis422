@@ -103,18 +103,10 @@ class AddressBooksFrame():
     def cmdExport(self):
         self.exportFileName = asksaveasfilename()
         tempContacts = []
-        print self.app.contactsList.curselection()
         for x in self.app.contactsList.curselection():
             tempContacts.append(self.app.contactPairs[int(x)+1])
 
-        print tempContacts
         self.mainBook.export(tempContacts,self.exportFileName)
-
-       # print(self.exportFileName)
-        #self.mainBook.export(.mainBook.)
-       # print(self.app.contactsList.curselection())
-
-        #self.mainBook.e
 
     #action for File-->Quit
     def cmdQuit(self):
