@@ -75,6 +75,7 @@ class AddressBooksFrame():
             print("Save to: " + self.saveFileName)
             #call the save function
             self.books.save(self.saveFileName)
+            self.app.unSavedChanges = 0
 
     #action for File-->SaveAs
     def cmdSaveAs(self):
@@ -91,6 +92,7 @@ class AddressBooksFrame():
             self.fileMenu.entryconfig(3,state=tk.NORMAL) #Save
             #call the save function
             self.books.save(self.saveFileName)
+            self.app.unSavedChanges = 0
 
     #action for File-->Import
     def cmdImport(self):
