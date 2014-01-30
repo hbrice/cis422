@@ -12,6 +12,8 @@ class AddressBookFrame():
 
     def __init__(self, master, addressBookLogic):
 
+        self.unSavedChanges = 0
+
         testContact1 = contact.contact("John Doe")
         testLast1 = "Alameda CA 9"
         testDelivery1 = "1401 SW Main St."
@@ -117,6 +119,8 @@ class AddressBookFrame():
         #update the listbox
         self.cmdUpdateListbox(self.logic.contacts)
 
+        self.unSavedChanges = 1
+
     def cmdRemove(self):
         tmpSelection = self.contactsList.curselection()
         if len(tmpSelection) > 0:
@@ -138,6 +142,7 @@ class AddressBookFrame():
                 self.entryPhone.delete(0,tk.END)
                 self.entryName.delete(0,tk.END)
                 self.cmdUpdateListbox(self.logic.contacts)
+                self.unSavedChanges = 1
         else:
             tkMessageBox.showinfo("Not enough!", "No entries selected.")
 
@@ -178,6 +183,7 @@ class AddressBookFrame():
                 self.logic.removeContact(tempContact)
                 #add the contact back in with the updated info
                 self.cmdAdd()
+                self.unSavedChanges = 1
         else:
             tkMessageBox.showinfo("Not enough!", "No entries selected.")
 

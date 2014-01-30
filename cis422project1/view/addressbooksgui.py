@@ -46,11 +46,19 @@ class AddressBooksFrame():
     #action for File-->Close
     def cmdClose(self):
         print "Close address book"
+        if self.app.unSavedChanges == 1:
+            result = tkMessageBox.askquestion("Unsaved","You have unsaved changes in the address book, are you sure you want to close it?")
+            if result == 'no':
+                return
 
         #remove the container frame
         self.app.frame.grid_forget()
         #we won't need any pointer to is so destroy
         self.app.frame.destroy()
+
+        #enable new & open
+        self.fileMenu.entryconfig(0,state=tk.NORMAL) #new
+        self.fileMenu.entryconfig(1,state=tk.NORMAL) #open
 
         #disable menu options
         self.fileMenu.entryconfig(2,state=tk.DISABLED) #close
@@ -58,6 +66,7 @@ class AddressBooksFrame():
         self.fileMenu.entryconfig(4,state=tk.DISABLED) #Save As
         self.fileMenu.entryconfig(5,state=tk.DISABLED) #Import
         self.fileMenu.entryconfig(6,state=tk.DISABLED) #export
+
 
     #action for File-->Save
     def cmdSave(self):
@@ -108,37 +117,39 @@ class AddressBooksFrame():
 
     #action for File-->Quit
     def cmdQuit(self):
-        #close hte whole program
-        sys.exit()
+        if hasattr(self, 'app'):
+            if self.app.unSavedChanges == 1:
+                result = tkMessageBox.askquestion("Unsaved","You have unsaved changes in the address book, are you sure you want to quit?")
+                if result == 'yes':
+                    sys.exit()
+                else:
+                    return
+            else:
+                #close the whole program
+                sys.exit()
+        else:
+            sys.exit()
 
     #action for File-->New
     def cmdNew(self):
+        #for now we have a single address book
+        self.mainBook = addressbook.addressbook()
 
-        try:
-            #display dialog for new file
-             self.newFileName = asksaveasfilename()
-        except:
-            print "Error"
-            return
+        #add the single addressbook to the addressbooks container
+        self.books.addAddressBook(self.mainBook)
 
-        #print the user selected filename
-        print(self.newFileName)
-        #take newFileName and create a new AddressBookFrame within AddressBooksFrame
+        self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.mainBook)
 
-        if self.newFileName != "":
-            #for now we have a single address book
-            self.mainBook = addressbook.addressbook()
+        #enable menu options
+        self.fileMenu.entryconfig(2,state=tk.NORMAL) #close
+        self.fileMenu.entryconfig(4,state=tk.NORMAL) #Save As
+        self.fileMenu.entryconfig(5,state=tk.NORMAL) #Import
+        self.fileMenu.entryconfig(6,state=tk.NORMAL) #export
 
-            #add the single addressbook to the addressbooks container
-            self.books.addAddressBook(self.mainBook)
+        #disable new & open
+        self.fileMenu.entryconfig(0,state=tk.DISABLED) #new
+        self.fileMenu.entryconfig(1,state=tk.DISABLED) #open
 
-            self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.mainBook)
-
-            #enable menu options
-            self.fileMenu.entryconfig(2,state=tk.NORMAL) #close
-            self.fileMenu.entryconfig(4,state=tk.NORMAL) #Save As
-            self.fileMenu.entryconfig(5,state=tk.NORMAL) #Import
-            self.fileMenu.entryconfig(6,state=tk.NORMAL) #export
 
     def cmdOpen(self):
         try:
@@ -157,6 +168,10 @@ class AddressBooksFrame():
             self.books.load(self.openFileName)
 
             self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.books.addressBooksList[0])
+
+            #disable new & open
+            self.fileMenu.entryconfig(0,state=tk.DISABLED) #new
+            self.fileMenu.entryconfig(1,state=tk.DISABLED) #open
 
             #enable menu options
             self.fileMenu.entryconfig(2,state=tk.NORMAL) #close
