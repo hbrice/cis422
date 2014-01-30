@@ -6,7 +6,6 @@ from tkFileDialog import asksaveasfile
 from tkFileDialog import asksaveasfilename
 from view import addressbookgui
 import sys
-from model import addressbooks
 from model import addressbook
 import tkMessageBox
 
@@ -16,7 +15,7 @@ class AddressBooksFrame():
         self.master = master
 
         #container for ALL the addressbook
-        self.books = addressbooks.addressbooks()
+        self.books = addressbook.addressbook()
 
        # self.newWindow = tk.Toplevel(self.master)
         self.topFrame = tk.Frame(self.master)
@@ -104,18 +103,10 @@ class AddressBooksFrame():
     def cmdExport(self):
         self.exportFileName = asksaveasfilename()
         tempContacts = []
-        print self.app.contactsList.curselection()
         for x in self.app.contactsList.curselection():
-            print x
-            print self.app.contactPairs[int(x)+1]
             tempContacts.append(self.app.contactPairs[int(x)+1])
+
         self.mainBook.export(tempContacts,self.exportFileName)
-
-       # print(self.exportFileName)
-        #self.mainBook.export(.mainBook.)
-       # print(self.app.contactsList.curselection())
-
-        #self.mainBook.e
 
     #action for File-->Quit
     def cmdQuit(self):
@@ -138,7 +129,7 @@ class AddressBooksFrame():
         self.mainBook = addressbook.addressbook()
 
         #add the single addressbook to the addressbooks container
-        self.books.addAddressBook(self.mainBook)
+        #self.books.addAddressBook(self.mainBook)
 
         self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.mainBook)
 
