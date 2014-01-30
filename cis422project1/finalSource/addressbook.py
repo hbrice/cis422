@@ -138,9 +138,14 @@ class addressbook:
             f = open(fileName, 'r')
             data = utils.importParse(f)
             for element in data:
-                newContact = contact(element['Recipient'])
-                newAddress = address(element['Last'], element['Delivery'], element['Second'])
-                newContact.addAddress(newAddress)
+
+                if 'Recipient' in element:
+                    newContact = contact.contact(element['Recipient'])
+                if 'Last' in element:
+                        if 'Delivery' in element:
+                            if 'Second' in element:
+                                newAddress = address.address(element['Last'], element['Delivery'], element['Second'])
+                                newContact.addAddress(newAddress)
                 if 'Phone' in element:
                     newContact.addPhoneNumber(element['Phone'])
                 if 'Email' in element:

@@ -2,7 +2,7 @@
 #tab seperated entry\n
 #tab seperated entry\n
 #...
-
+import tkMessageBox
 #The expected header. We can toss anything else out
 _HEADER="Last\tDelivery\tSecond\tRecipient\tPhone"
 
@@ -11,6 +11,7 @@ def importParse(importFile):
     entryList = list()
     firstLine = True
     header = importFile.readline()
+
     if _HEADER in header:
         inputFormat = _HEADER.rstrip().split('\t')
         lines = importFile.readlines()
@@ -20,4 +21,4 @@ def importParse(importFile):
             entryList.append(dict(zip(inputFormat, line.rstrip().split('\t'))))
         return entryList
     else:
-        print "Invalid Header in import file"
+        tkMessageBox.showinfo("Alert", "Invalid Header in import file", icon='warning')
