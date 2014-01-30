@@ -8,6 +8,7 @@ from view import addressbookgui
 import sys
 from model import addressbook
 import tkMessageBox
+import pickle
 
 class AddressBooksFrame():
 
@@ -37,7 +38,9 @@ class AddressBooksFrame():
         self.fileMenu.add_command(label="Save As", command=self.cmdSaveAs, state=tk.DISABLED)
         self.fileMenu.add_command(label="Import", command=self.cmdImport, state=tk.DISABLED)
         self.fileMenu.add_command(label="Export", command=self.cmdExport, state=tk.DISABLED)
-        self.fileMenu.add_command(label="Quit", command=self.cmdQuit)
+        self.fileMenu.add_command(label="Print Mailing", command=self.cmdPrint, state=tk.DISABLED)
+        self.fileMenu.add_command(label="Merge", command=self.cmdMerge, state=tk.DISABLED)
+        self.fileMenu.add_command(label="Quit", command=self.cmdQuit, state=tk.DISABLED)
         self.menuBar.add_cascade(label="File", menu=self.fileMenu)
 
         self.master.config(menu=self.menuBar)
@@ -65,6 +68,8 @@ class AddressBooksFrame():
         self.fileMenu.entryconfig(4,state=tk.DISABLED) #Save As
         self.fileMenu.entryconfig(5,state=tk.DISABLED) #Import
         self.fileMenu.entryconfig(6,state=tk.DISABLED) #export
+        self.fileMenu.entryconfig(7,state=tk.DISABLED) #print
+        self.fileMenu.entryconfig(8,state=tk.DISABLED) #merge
 
 
     #action for File-->Save
@@ -97,16 +102,33 @@ class AddressBooksFrame():
     def cmdImport(self):
         self.openFileName = askopenfilename()
         print(self.openFileName)
-        self.mainBook.addressBookImport(self.openFileName,self.app.contactsList)
+        self.mainBook.addressBookImport(self.openFileName,self.app)
 
     #action for File-->Export
     def cmdExport(self):
         self.exportFileName = asksaveasfilename()
-        tempContacts = []
-        for x in self.app.contactsList.curselection():
-            tempContacts.append(self.app.contactPairs[int(x)+1])
 
-        self.mainBook.export(tempContacts,self.exportFileName)
+        if self.exportFileName != "":
+            tempContacts = []
+            for x in self.app.contactsList.curselection():
+                tempContacts.append(self.app.contactPairs[int(x)+1])
+
+            self.mainBook.export(tempContacts,self.exportFileName)
+
+    def cmdPrint(self):
+        self.exportFileName = asksaveasfilename()
+
+        if self.exportFileName != "":
+            f = open(self.exportFileName, 'w')
+            for x in self.mainBook.contacts:
+                #print >> f, x
+                f.write(x.mailingFormat())
+                f.write("\n\n")
+            f.close
+
+    def cmdMerge(selfself):
+
+        print "merge"
 
     #action for File-->Quit
     def cmdQuit(self):
@@ -138,6 +160,8 @@ class AddressBooksFrame():
         self.fileMenu.entryconfig(4,state=tk.NORMAL) #Save As
         self.fileMenu.entryconfig(5,state=tk.NORMAL) #Import
         self.fileMenu.entryconfig(6,state=tk.NORMAL) #export
+        self.fileMenu.entryconfig(7,state=tk.NORMAL) #print
+        self.fileMenu.entryconfig(8,state=tk.NORMAL) #merge
 
         #disable new & open
         self.fileMenu.entryconfig(0,state=tk.DISABLED) #new
@@ -145,12 +169,29 @@ class AddressBooksFrame():
 
 
     def cmdOpen(self):
-        try:
-            #display dialog for new file
-             self.openFileName = askopenfilename()
-        except:
-            print "Error"
-            return
+        #display dialog for new file
+        self.openFileName = askopenfilename()
+
+        #for now we have a single address book
+        self.mainBook = pickle.load(open(self.openFileName, 'rb'))
+
+        #add the single addressbook to the addressbooks container
+        #self.books.addAddressBook(self.mainBook)
+
+        self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.mainBook)
+
+        #enable menu options
+        self.fileMenu.entryconfig(2,state=tk.NORMAL) #close
+        self.fileMenu.entryconfig(4,state=tk.NORMAL) #Save As
+        self.fileMenu.entryconfig(5,state=tk.NORMAL) #Import
+        self.fileMenu.entryconfig(6,state=tk.NORMAL) #export
+        self.fileMenu.entryconfig(7,state=tk.NORMAL) #print
+        self.fileMenu.entryconfig(8,state=tk.NORMAL) #merge
+
+        #disable new & open
+        self.fileMenu.entryconfig(0,state=tk.DISABLED) #new
+        self.fileMenu.entryconfig(1,state=tk.DISABLED) #open
+
 
         #print the user selected filename
         print(self.openFileName)
@@ -171,4 +212,6 @@ class AddressBooksFrame():
             self.fileMenu.entryconfig(4,state=tk.NORMAL) #Save As
             self.fileMenu.entryconfig(5,state=tk.NORMAL) #Import
             self.fileMenu.entryconfig(6,state=tk.NORMAL) #export
+            self.fileMenu.entryconfig(7,state=tk.NORMAL) #print
+            self.fileMenu.entryconfig(8,state=tk.NORMAL) #merge
 
