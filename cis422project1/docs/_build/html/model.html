@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>model package &mdash; addressbook 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="addressbook 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">addressbook 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="model-package">
+<h1>model package<a class="headerlink" href="#model-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-model.address">
+<span id="model-address-module"></span><h2>model.address module<a class="headerlink" href="#module-model.address" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="model.address.address">
+<em class="property">class </em><tt class="descclassname">model.address.</tt><tt class="descname">address</tt><big>(</big><em>last</em>, <em>delivery</em>, <em>second</em><big>)</big><a class="headerlink" href="#model.address.address" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="model.address.address.parseLast">
+<tt class="descname">parseLast</tt><big>(</big><em>last</em><big>)</big><a class="headerlink" href="#model.address.address.parseLast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes sure that last is parsed correctly, test cases when city has two words.
+EXAMPLE:
+SAN DIEGO CA 97201
+0    1    2    3
+will return a list with [&#8220;san diego&#8221;, &#8220;ca&#8221;, &#8220;97201&#8221;]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-model.addressbook">
+<span id="model-addressbook-module"></span><h2>model.addressbook module<a class="headerlink" href="#module-model.addressbook" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="model.addressbook.addressbook">
+<em class="property">class </em><tt class="descclassname">model.addressbook.</tt><tt class="descname">addressbook</tt><a class="headerlink" href="#model.addressbook.addressbook" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="model.addressbook.addressbook.addContact">
+<tt class="descname">addContact</tt><big>(</big><em>contact</em><big>)</big><a class="headerlink" href="#model.addressbook.addressbook.addContact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to add to contacts list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.addressbook.addressbook.addressBookImport">
+<tt class="descname">addressBookImport</tt><big>(</big><em>fileName</em>, <em>app</em><big>)</big><a class="headerlink" href="#model.addressbook.addressbook.addressBookImport" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="model.addressbook.addressbook.export">
+<tt class="descname">export</tt><big>(</big><em>contacts</em>, <em>fileName</em><big>)</big><a class="headerlink" href="#model.addressbook.addressbook.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export a line for each contact in the list &#8220;contacts&#8221; using the specified tab seperated list
+Last Delivery        SecondRecipient        Phone</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.addressbook.addressbook.findContactByName">
+<tt class="descname">findContactByName</tt><big>(</big><em>recipient</em><big>)</big><a class="headerlink" href="#model.addressbook.addressbook.findContactByName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds all contacts by recipient which includes both the first name and last name. If more than one contact
+with the same recipient is found then both are added to the contactList to be returned. If no contacts are
+found then alert window pops up and displays contact not found</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.addressbook.addressbook.generalSearchContacts">
+<tt class="descname">generalSearchContacts</tt><big>(</big><em>keyword</em><big>)</big><a class="headerlink" href="#model.addressbook.addressbook.generalSearchContacts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds all contacts that have the string keyword parameter passed in. For example all contacts can be found
+that contain an address with &#8220;st.&#8221; If nothing is found, then alert window pops up and displays, &#8220;No matches
+Found!&#8221;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.addressbook.addressbook.load">
+<tt class="descname">load</tt><big>(</big><em>fileName</em><big>)</big><a class="headerlink" href="#model.addressbook.addressbook.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load: sets the addressBooksList of self to the unpickled&#8217;s list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.addressbook.addressbook.mergeAddressBook">
+<tt class="descname">mergeAddressBook</tt><big>(</big><em>otherAddressBook</em><big>)</big><a class="headerlink" href="#model.addressbook.addressbook.mergeAddressBook" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merges two address books together by going through the otherAddressBook and adding it&#8217;s contacts to self.contacts list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.addressbook.addressbook.removeContact">
+<tt class="descname">removeContact</tt><big>(</big><em>contact</em><big>)</big><a class="headerlink" href="#model.addressbook.addressbook.removeContact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds all contacts with the same recipient but removes the contact only with the same cid.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.addressbook.addressbook.save">
+<tt class="descname">save</tt><big>(</big><em>fileName</em>, <em>overwrite=False</em><big>)</big><a class="headerlink" href="#model.addressbook.addressbook.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save: Function for saving an addressbooks instance. The arguments are a file name, and an overwrite flag.
+If no flag is passed the default is to not overwrite that file if it exists.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.addressbook.addressbook.sortByLname">
+<tt class="descname">sortByLname</tt><big>(</big><big>)</big><a class="headerlink" href="#model.addressbook.addressbook.sortByLname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort function that sorts by lname of contacts in address book and assigns it to the self.contacts list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.addressbook.addressbook.sortByZip">
+<tt class="descname">sortByZip</tt><big>(</big><big>)</big><a class="headerlink" href="#model.addressbook.addressbook.sortByZip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort function that sorts by zip in address book and assigns it to the self.contacts list</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-model.contact">
+<span id="model-contact-module"></span><h2>model.contact module<a class="headerlink" href="#module-model.contact" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="model.contact.contact">
+<em class="property">class </em><tt class="descclassname">model.contact.</tt><tt class="descname">contact</tt><big>(</big><em>recipient</em><big>)</big><a class="headerlink" href="#model.contact.contact" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="model.contact.contact.addAddress">
+<tt class="descname">addAddress</tt><big>(</big><em>addr</em><big>)</big><a class="headerlink" href="#model.contact.contact.addAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds address to addressList, before adding though makes sure that address is not already there, also
+checks if the zip is correct and adds to firstZip if it is the first address added to the contact (firstZip is
+used to sort all contacts by zip). Alert boxes pop up if the zip is not an integer or if address is already
+added to the contact.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.contact.contact.addEmail">
+<tt class="descname">addEmail</tt><big>(</big><em>email</em><big>)</big><a class="headerlink" href="#model.contact.contact.addEmail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds email to contact, makes sure its in lower case and not added to contact already. If email is there already
+an alert window will pop up giving an alert and will not add to contact</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.contact.contact.addField">
+<tt class="descname">addField</tt><big>(</big><em>name</em>, <em>value</em><big>)</big><a class="headerlink" href="#model.contact.contact.addField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows for a user to add their own attribute to a contact with a specified value. A user could add an &#8220;age&#8221;
+attribute by calling contact.addField(&#8220;age&#8221;, 21). Only adds to this instance of the contact however and not
+every instance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.contact.contact.addPhoneNumber">
+<tt class="descname">addPhoneNumber</tt><big>(</big><em>phoneNumber</em><big>)</big><a class="headerlink" href="#model.contact.contact.addPhoneNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds phone number to contact checks validity must be 10 digits if not alert window appears and does not add phone
+number. If phone number is in contact then alert window appears and phone number is not added.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.contact.contact.checkName">
+<tt class="descname">checkName</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#model.contact.contact.checkName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes sure that if name with three words are specified with the correct first name and last name.
+An alert window will pop open an ask if the first name is a two word name or first word name
+Example: Ann Marie Smith, first name could be both Ann Marie or Ann.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.contact.contact.checkPhone">
+<tt class="descname">checkPhone</tt><big>(</big><em>number</em><big>)</big><a class="headerlink" href="#model.contact.contact.checkPhone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes sure that the phone number has only 10 digits. Does not support phone numbers that have 1 before area code.
+For example: 1 (510) 332 4565 IS NOT SUPPORTED!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.contact.contact.checkZip">
+<tt class="descname">checkZip</tt><big>(</big><em>zip</em><big>)</big><a class="headerlink" href="#model.contact.contact.checkZip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes sure that the zip is actually a digit and not some random string with chars and numbers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.contact.contact.getField">
+<tt class="descname">getField</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#model.contact.contact.getField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function used for addField() function. See function for details</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.contact.contact.mailingFormat">
+<tt class="descname">mailingFormat</tt><big>(</big><big>)</big><a class="headerlink" href="#model.contact.contact.mailingFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns string with specified mailing format...Example...
+john doe
+1401 sw main st.
+san diego ca 94501 san diego 94501</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.contact.contact.removeAddress">
+<tt class="descname">removeAddress</tt><big>(</big><em>addr</em><big>)</big><a class="headerlink" href="#model.contact.contact.removeAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds address and removes it from the contact&#8217;s list of addresses. If contact is not found alert window will
+appear and display cannot find address</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.contact.contact.removeEmail">
+<tt class="descname">removeEmail</tt><big>(</big><em>email</em><big>)</big><a class="headerlink" href="#model.contact.contact.removeEmail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds email and removes it from the contact&#8217;s list of emails. If contact is not found alert window will
+appear and displays cannot find email</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.contact.contact.removePhoneNumber">
+<tt class="descname">removePhoneNumber</tt><big>(</big><em>phoneNumber</em><big>)</big><a class="headerlink" href="#model.contact.contact.removePhoneNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds phone number and removes it from the contact&#8217;s list of phone numbers. If contact is not found alert window will
+appear and display cannot find phone number</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="model.contact.contact.setField">
+<tt class="descname">setField</tt><big>(</big><em>name</em>, <em>value</em><big>)</big><a class="headerlink" href="#model.contact.contact.setField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function used for addField() function. See function for details</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-model">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-model" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">model package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-model.address">model.address module</a></li>
+<li><a class="reference internal" href="#module-model.addressbook">model.addressbook module</a></li>
+<li><a class="reference internal" href="#module-model.contact">model.contact module</a></li>
+<li><a class="reference internal" href="#module-model">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/model.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">addressbook 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Lucas Rondenet, Josh Schmidt, Holly Brice, Dillon Smith, Tommy Dodson.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.1.
+    </div>
+  </body>
+</html>

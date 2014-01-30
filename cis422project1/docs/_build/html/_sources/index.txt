@@ -10,10 +10,11 @@ AddressBook is a python application meant to simplify the chaotic process of cre
 Features
 --------
 
-- Create a contact with additional 
-- Seemesly move contacts within other addressbooks
+- Create customizable contacts, by adding user defined fields
 - Edit contacts (delete or add fields)
-- 
+- Scalable user friendly general search
+- Sort by zip or last name
+- Add as many addresses, emails, and phone numbers to a list
 
 Contribute
 ----------
@@ -23,7 +24,6 @@ Contribute
 
 Support
 -------
-
 
 Content:
 =========
@@ -36,6 +36,8 @@ Content:
    getting started
    datatypes
 
+.. automodule:: address
+	:members:
 
 Indices and tables
 ==================

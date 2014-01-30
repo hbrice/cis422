@@ -19,11 +19,12 @@ import os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
-path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../model'))
-if not path in sys.path:
-    sys.path.insert(1, path)
-del path
-
+#sys.path.insert(0, os.path.abspath("../model"))
+#print(os.path.abspath("../model"))
+# This will include the necessary source files folders in the PATH to be able to generate the documentation from.
+#sys.path.append('/Users/lucasr/Documents/github/cis422/cis422project1/model')
+#sys.path.insert(0, os.path.abspath('../model'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../model')
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -47,7 +48,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'addressbooks'
+project = u'addressbook'
 copyright = u'2014, Lucas Rondenet, Josh Schmidt, Holly Brice, Dillon Smith, Tommy Dodson'
 
 # The version info for the project you're documenting, acts as replacement for

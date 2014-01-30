@@ -12,7 +12,9 @@ Features
 
 - Create customizable contacts, by adding user defined fields
 - Edit contacts (delete or add fields)
-- User friendly general search
+- Scalable user friendly general search
+- Sort by zip or last name
+- Add as many addresses, emails, and phone numbers to a list
 
 Contribute
 ----------
@@ -22,7 +24,6 @@ Contribute
 
 Support
 -------
-
 
 Content:
 =========
@@ -34,7 +35,6 @@ Content:
    installation
    getting started
    datatypes
-
 
 Indices and tables
 ==================
