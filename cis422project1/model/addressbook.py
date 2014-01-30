@@ -81,7 +81,6 @@ class addressbook:
            Last\tDelivery\tSecond\Recipient\tPhone
         """
         if os.path.exists(fileName) == 0:
-            print "creating file"
             f = open(fileName, 'w')
             f.close
 
@@ -107,16 +106,21 @@ class addressbook:
         f.close
     
     #takes a fileName and uses the parser, contact, and address to add each line of the file to the addressbook.
-    def addressBookImport(self, fileName, contactList):
+    def addressBookImport(self, fileName, app):
         if os.path.exists(fileName):
             f = open(fileName, 'r')
             data = utils.importParse(f)
             for element in data:
+                print element
                 newContact = contact(element['Recipient'])
                 newAddress = address(element['Last'], element['Delivery'], element['Second'])
                 newContact.addAddress(newAddress)
+                if 'Phone' in element:
+                    newContact.addPhoneNumber(element['Phone'])
+                if 'Email' in element:
+                    newContact.addEmail(element['Email'])
                 self.addContact(newContact)
-                contactList.insert(0,element['Recipient'])
+                app.cmdUpdateListbox(self.contacts)
         #todo: error reporting
         print "Path doesn't exist."
 
