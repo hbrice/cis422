@@ -11,6 +11,7 @@ del path
 
 import utils
 import tkMessageBox
+import pickle
 from contact import contact
 from address import address
 from operator import attrgetter
@@ -102,5 +103,22 @@ class addressbook:
         #todo: error reporting
         print "Path doesn't exist."
 
+    """Save: Function for saving an addressbooks instance.
+    The arguments are a file name, and an overwrite flag. If no flag is passed
+    the default is to not overwrite that file if it exists."""
+    def save(self, fileName, overwrite = False):
+        if not os.path.exists(fileName) or overwrite:
+            output = open(fileName, 'w+')
+            pickle.dump(self, output)
+            output.close()
+        else:
+            print("AddressBooks file already exists. Overwrite?")
 
+    """Load: sets the addressBooksList of self to the unpickled's list."""
+    def load(self, fileName):
+        if os.path.exists(fileName):
+             input = open(fileName, 'rb')
+             data = pickle.load(fileName)
+             if type(data) is self.addressBooksList:
+             	self.addressBooksList = data.addressBooksList
 
