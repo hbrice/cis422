@@ -40,7 +40,7 @@ class AddressBooksFrame():
         self.fileMenu.add_command(label="Export", command=self.cmdExport, state=tk.DISABLED)
         self.fileMenu.add_command(label="Print Mailing", command=self.cmdPrint, state=tk.DISABLED)
         self.fileMenu.add_command(label="Merge", command=self.cmdMerge, state=tk.DISABLED)
-        self.fileMenu.add_command(label="Quit", command=self.cmdQuit, state=tk.DISABLED)
+        self.fileMenu.add_command(label="Quit", command=self.cmdQuit)
         self.menuBar.add_cascade(label="File", menu=self.fileMenu)
 
         self.master.config(menu=self.menuBar)
