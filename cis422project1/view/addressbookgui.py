@@ -68,9 +68,9 @@ class AddressBookFrame():
         testContact3.addEmail(testEmail3_2)
         testContact3.addPhoneNumber(testPhoneNumber3)
 
-        addressBookLogic.addContact(testContact1)
-        addressBookLogic.addContact(testContact2)
-        addressBookLogic.addContact(testContact3)
+        #addressBookLogic.addContact(testContact1)
+        #addressBookLogic.addContact(testContact2)
+        #addressBookLogic.addContact(testContact3)
 
         self.master = master
 

@@ -76,9 +76,7 @@ class AddressBooksFrame():
     def cmdSave(self):
         #if the filename is not blank
         if self.saveFileName != "":
-            print("Save to: " + self.saveFileName)
-            #call the save function
-            self.books.save(self.saveFileName)
+            self.mainBook.export(self.mainBook.contacts,self.saveFileName)
             self.app.unSavedChanges = 0
 
     #action for File-->SaveAs
@@ -91,11 +89,11 @@ class AddressBooksFrame():
 
         #if the filename is not blank
         if self.saveFileName != "":
-            print("Save to: " + self.saveFileName)
             #once it's been saved once we can save without prompting
             self.fileMenu.entryconfig(3,state=tk.NORMAL) #Save
             #call the save function
-            self.books.save(self.saveFileName)
+            #self.books.save(self.saveFileName)
+            self.mainBook.export(self.mainBook.contacts,self.saveFileName)
             self.app.unSavedChanges = 0
 
     #action for File-->Import
@@ -169,40 +167,13 @@ class AddressBooksFrame():
 
 
     def cmdOpen(self):
-        #display dialog for new file
+        #display dialog for load file
         self.openFileName = askopenfilename()
 
-        #for now we have a single address book
-        self.mainBook = pickle.load(open(self.openFileName, 'rb'))
-
-        #add the single addressbook to the addressbooks container
-        #self.books.addAddressBook(self.mainBook)
-
-        self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.mainBook)
-
-        #enable menu options
-        self.fileMenu.entryconfig(2,state=tk.NORMAL) #close
-        self.fileMenu.entryconfig(4,state=tk.NORMAL) #Save As
-        self.fileMenu.entryconfig(5,state=tk.NORMAL) #Import
-        self.fileMenu.entryconfig(6,state=tk.NORMAL) #export
-        self.fileMenu.entryconfig(7,state=tk.NORMAL) #print
-        self.fileMenu.entryconfig(8,state=tk.NORMAL) #merge
-
-        #disable new & open
-        self.fileMenu.entryconfig(0,state=tk.DISABLED) #new
-        self.fileMenu.entryconfig(1,state=tk.DISABLED) #open
-
-
-        #print the user selected filename
-        print(self.openFileName)
-        #take newFileName and create a new AddressBookFrame within AddressBooksFrame
-
         if self.openFileName != "":
-
-            self.books.load(self.openFileName)
-
-            self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.books.addressBooksList[0])
-
+            self.mainBook = addressbook.addressbook()
+            self.app = addressbookgui.AddressBookFrame(self.bottomFrame,self.mainBook)
+            self.mainBook.addressBookImport(self.openFileName,self.app)
             #disable new & open
             self.fileMenu.entryconfig(0,state=tk.DISABLED) #new
             self.fileMenu.entryconfig(1,state=tk.DISABLED) #open
