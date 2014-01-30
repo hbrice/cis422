@@ -12,6 +12,24 @@ class AddressBookFrame():
 
     def __init__(self, master, addressBookLogic):
 
+        self.unSavedChanges = 0
+        self.unUpdated = 0
+
+        self.svName = tk.StringVar()
+        self.svLast = tk.StringVar()
+        self.svDelivery = tk.StringVar()
+        self.svSecond = tk.StringVar()
+        self.svEmail = tk.StringVar()
+        self.svPhone = tk.StringVar()
+
+        self.svName.trace("w", self.entryChanged)
+        self.svLast.trace("w", self.entryChanged)
+        self.svDelivery.trace("w", self.entryChanged)
+        self.svSecond.trace("w", self.entryChanged)
+        self.svEmail.trace("w", self.entryChanged)
+        self.svPhone.trace("w", self.entryChanged)
+
+
         testContact1 = contact.contact("John Doe")
         testLast1 = "Alameda CA 9"
         testDelivery1 = "1401 SW Main St."
@@ -75,8 +93,25 @@ class AddressBookFrame():
         self.cmdUpdateListbox(self.logic.contacts)
         self.contactPairs
 
+    def checkUpdated(self):
+        if self.unUpdated == 1:
+            result = tkMessageBox.askquestion("Unsaved","You have unsaved changes for the selected contact, are you sure you want to continue?")
+            if result == 'no':
+                return 0
+            else:
+                return 1
+                self.unUpdated = 0
+        return 1
+
+
+    def entryChanged(self, *args):
+        self.unUpdated = 1
+
     """function that is bound the the listbox selection"""
     def onSelect(self, evt):
+        if self.checkUpdated() == 0:
+            return
+
         w = evt.widget
         index = int(w.curselection()[0]) + 1
         tmpContact = self.contactPairs[index]
@@ -100,6 +135,8 @@ class AddressBookFrame():
         if len(tmpContact.phoneNumberList) > 0:
             self.entryPhone.insert(0, tmpContact.phoneNumberList[0])
 
+        self.unUpdated = 0
+
 
     def cmdAdd(self):
         #create a new contact based on the contact's name
@@ -116,6 +153,8 @@ class AddressBookFrame():
         self.logic.addContact(self.tempContact)
         #update the listbox
         self.cmdUpdateListbox(self.logic.contacts)
+
+        self.unSavedChanges = 1
 
     def cmdRemove(self):
         tmpSelection = self.contactsList.curselection()
@@ -138,11 +177,15 @@ class AddressBookFrame():
                 self.entryPhone.delete(0,tk.END)
                 self.entryName.delete(0,tk.END)
                 self.cmdUpdateListbox(self.logic.contacts)
+                self.unSavedChanges = 1
         else:
             tkMessageBox.showinfo("Not enough!", "No entries selected.")
 
 
     def cmdNameSearch(self):
+        if self.checkUpdated() == 0:
+            return
+
         print "Name Search"
         query = self.entrySearch.get()
         if query != "":
@@ -154,6 +197,9 @@ class AddressBookFrame():
 
 
     def cmdGeneralSearch(self):
+        if self.checkUpdated() == 0:
+            return
+
         print "General Search"
         query = self.entrySearch.get()
         if query != "":
@@ -178,15 +224,22 @@ class AddressBookFrame():
                 self.logic.removeContact(tempContact)
                 #add the contact back in with the updated info
                 self.cmdAdd()
+                self.unSavedChanges = 1
         else:
             tkMessageBox.showinfo("Not enough!", "No entries selected.")
 
     def cmdClear(self):
+        if self.checkUpdated() == 0:
+            return
+
         print "Clear"
         self.entrySearch.delete(0,tk.END)
         self.cmdUpdateListbox(self.logic.contacts)
 
     def cmdClearContact(self):
+        if self.checkUpdated() == 0:
+            return
+
         #clear all the entry boxes
         self.entryAddressSecond.delete(0,tk.END)
         self.entryAddressDelivery.delete(0,tk.END)
@@ -196,19 +249,28 @@ class AddressBookFrame():
         self.entryName.delete(0,tk.END)
 
     def cmdSortName(self):
+        if self.checkUpdated() == 0:
+            return
+
         print "sort by last name"
         self.logic.sortByLname()
         self.cmdUpdateListbox(self.logic.contacts)
 
     def cmdSortZIP(self):
+        if self.checkUpdated() == 0:
+            return
+
         print "sort by ZIP"
         self.logic.sortByZip()
         self.cmdUpdateListbox(self.logic.contacts)
 
     def cmdClearListBox(self):
+        if self.checkUpdated() == 0:
+            return
         self.contactsList.delete(0,tk.END)
 
     def cmdUpdateListbox(self, contacts):
+
         currentContacts = contacts
         self.contactPairs = {}
         self.contactsList.delete(0,tk.END)
@@ -216,6 +278,7 @@ class AddressBookFrame():
             self.contactPairs[len(self.contactPairs)+1] = x
             tmpName = self.contactPairs[len(self.contactPairs)].fname + " " + self.contactPairs[len(self.contactPairs)].lname
             self.contactsList.insert(tk.END,tmpName)
+        self.unUpdated = 0
 
     def initUI(self):
         #############################
@@ -247,42 +310,42 @@ class AddressBookFrame():
         self.labelName = tk.Label(self.EntryFrame, text="Name")
         self.labelName.grid(row=0,column=0)
 
-        self.entryName = tk.Entry(self.EntryFrame)
+        self.entryName = tk.Entry(self.EntryFrame, textvariable=self.svName)
         self.entryName.grid(row=1,column=0)
 
         #Address line 1
         self.labelAddressLast = tk.Label(self.EntryFrame, text="Last")
         self.labelAddressLast.grid(row=2,column=0)
 
-        self.entryAddressLast = tk.Entry(self.EntryFrame)
+        self.entryAddressLast = tk.Entry(self.EntryFrame, textvariable=self.svLast)
         self.entryAddressLast.grid(row=3,column=0)
 
         #Address line 2
         self.labelAddressDelivery = tk.Label(self.EntryFrame, text="Delivery")
         self.labelAddressDelivery.grid(row=4,column=0)
 
-        self.entryAddressDelivery = tk.Entry(self.EntryFrame)
+        self.entryAddressDelivery = tk.Entry(self.EntryFrame, textvariable=self.svDelivery)
         self.entryAddressDelivery.grid(row=5,column=0)
 
         #Address line 3
         self.labelAddressSecond = tk.Label(self.EntryFrame, text="Second")
         self.labelAddressSecond.grid(row=6,column=0)
 
-        self.entryAddressSecond = tk.Entry(self.EntryFrame)
+        self.entryAddressSecond = tk.Entry(self.EntryFrame, textvariable=self.svSecond)
         self.entryAddressSecond.grid(row=7,column=0)
 
         #Email
         self.labelEmail = tk.Label(self.EntryFrame, text="Email Address")
         self.labelEmail.grid(row=8,column=0)
 
-        self.entryEmail = tk.Entry(self.EntryFrame)
+        self.entryEmail = tk.Entry(self.EntryFrame, textvariable=self.svEmail)
         self.entryEmail.grid(row=9,column=0)
 
         #Phone
         self.labelPhone = tk.Label(self.EntryFrame, text="Phone Number")
         self.labelPhone.grid(row=10,column=0)
 
-        self.entryPhone = tk.Entry(self.EntryFrame)
+        self.entryPhone = tk.Entry(self.EntryFrame, textvariable=self.svPhone)
         self.entryPhone.grid(row=11,column=0)
 
         #############################
