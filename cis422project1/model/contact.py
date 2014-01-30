@@ -18,8 +18,13 @@ class contact:
         # Phone: (503) 809-9120
         # addr = address(last, delivery, second)
         name = recipient.lower().split(" ")
-        self.fname = name[0]
-        self.lname = ' '.join(name[1:])
+        result = self.checkName(name)
+        if (result == True):
+            self.fname = name[0]
+            self.lname = ' '.join(name[1:])
+        else:
+            self.fname = ' '.join(name[0:2])
+            self.lname = ' '.join(name[2:])
         self.addressList = []
         self.firstZip = 0
         self.emailList = []
@@ -79,6 +84,17 @@ class contact:
             if (item in i):
                 inPhoneList = True
         return (inName or inAddrList or inEmailList or inPhoneList)
+
+    def checkName(self, name):
+        if (len(name) > 2):
+            result = tkMessageBox.askquestion("Alert", "We noticed that you have entered in a three word name. "
+                                                       "Is the first word the first name?")
+            if (result == 'yes'):
+                return True
+            else:
+                return False
+        else:
+            return True
 
     def addAddress(self, addr):
         if (addr not in self.addressList):
