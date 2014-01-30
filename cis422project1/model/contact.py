@@ -92,6 +92,12 @@ class contact:
         return output
 
     def mailingFormat(self):
+        """
+        Returns string with specified mailing format...Example...
+        john doe
+        1401 sw main st.
+        san diego ca 94501 san diego 94501
+        """
         # receiepent
         # streetnumber name
         # Apt4 city state zip
@@ -145,7 +151,8 @@ class contact:
         Example: Ann Marie Smith, first name could be both Ann Marie or Ann.
         """
         if (len(name) > 2):
-            result = tkMessageBox.askquestion("Alert", "We noticed that you have entered in a three word name: " + name +
+            tmp = ' '.join(name)
+            result = tkMessageBox.askquestion("Alert", "We noticed that you have entered in a three word name: " + tmp +
                                                        ", Is the first word the first name?")
             if (result == 'yes'):
                 return True
@@ -192,7 +199,7 @@ class contact:
     def addEmail(self, email):
         """
         Adds email to contact, makes sure its in lower case and not added to contact already. If email is there already
-
+        an alert window will pop up giving an alert and will not add to contact
         """
         if (email.lower() not in self.emailList):
             self.emailList.append(email)
@@ -200,6 +207,10 @@ class contact:
             tkMessageBox.showinfo("Alert", "Email Already added to this contact", icon='warning')
 
     def addPhoneNumber(self, phoneNumber):
+        """
+        Adds phone number to contact checks validity must be 10 digits if not alert window appears and does not add phone
+        number. If phone number is in contact then alert window appears and phone number is not added.
+        """
         if(self.checkPhone(phoneNumber)):
             if (phoneNumber not in self.phoneNumberList):
                 self.phoneNumberList.append(phoneNumber)
@@ -209,18 +220,30 @@ class contact:
             tkMessageBox.showinfo("Alert", "Phone number is not valid", icon='warning')
 
     def removeAddress(self, addr):
+        """
+        Finds address and removes it from the contact's list of addresses. If contact is not found alert window will
+        appear and display cannot find address
+        """
         try:
             self.addressList.remove(addr)
         except ValueError:
             tkMessageBox.showinfo("Alert", "Address not found!", icon='warning')
 
     def removeEmail(self, email):
+        """
+        Finds email and removes it from the contact's list of emails. If contact is not found alert window will
+        appear and displays cannot find email
+        """
         try:
             self.emailList.remove(email)
         except ValueError:
             tkMessageBox.showinfo("Alert", "Email not found!", icon='warning')
 
     def removePhoneNumber(self, phoneNumber):
+        """
+        Finds phone number and removes it from the contact's list of phone numbers. If contact is not found alert window will
+        appear and display cannot find phone number
+        """
         try:
             self.phoneNumberList.remove(phoneNumber)
         except ValueError:
