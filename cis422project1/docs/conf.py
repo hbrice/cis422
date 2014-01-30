@@ -22,9 +22,9 @@ import os
 #sys.path.insert(0, os.path.abspath("../model"))
 #print(os.path.abspath("../model"))
 # This will include the necessary source files folders in the PATH to be able to generate the documentation from.
-#sys.path.append('/Users/lucasr/Documents/github/cis422/cis422project1/model')
-sys.path.insert(0, os.path.abspath('../model'))
-#sys.path.append(os.path.join(os.path.dirname(__file__), '../model')
+
+sys.path.insert(os.path.realpath('.../finalSource'))
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
