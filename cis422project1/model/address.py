@@ -19,6 +19,9 @@ class address:
         parsedLast = self.parseLast(self.last)
         self.addressNumber = self.delivery.split(" ")[0]
         self.address = ' '.join(self.delivery.split(" ")[1:])
+        print(parsedLast[0])
+        print(parsedLast[1])
+        print(parsedLast[2])
         self.city = parsedLast[0]
         self.state = parsedLast[1]
         self.zip = parsedLast[2]
@@ -68,7 +71,7 @@ class address:
         """
         output = []
         tmp = last.split(" ")
-        idx = len(tmp)-1
+        idx = (len(tmp)-1)
         if (tmp[len(tmp)-1].isdigit()):
             output.insert(0,tmp[idx])
             output.insert(0,tmp[idx-1])
@@ -76,6 +79,6 @@ class address:
         else:
             tkMessageBox.showinfo("Alert", "No Zip found in input!", icon='warning')
             output.insert(0,"0")
-            output.insert(0,tmp[idx-1])
-            output.insert(0,' '.join(tmp[0:idx-1]))
+            output.insert(0,tmp[idx])
+            output.insert(0,' '.join(tmp[0:idx]))
         return output
