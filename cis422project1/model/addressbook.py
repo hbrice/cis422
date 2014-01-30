@@ -80,26 +80,34 @@ class addressbook:
         """Export a line for each contact in the list "contacts" using the specified tab seperated list
            Last\tDelivery\tSecond\Recipient\tPhone
         """
-        with open(fileName) as f:
-            for i in contacts:
-                with contacts[i] as contact:
-                    f.write(contact.address[0].city + " " + contact.address[0].state + " " + contact.address[0].zip + "\t")
-                    f.write(contact.address[0].addressNumber + " " + contact.address[0].address + "\t")
-                    f.write("\t")#f.write(contact.address[0].secondLine + "\t")# second line not implemented yet
-                    f.write(contact.fname + " " + contact.lname + "\t")
+        if os.path.exists(fileName) == 0:
+            print "creating file"
+            f = open(fileName, 'w')
+            f.close
+
+        with open(fileName, 'w') as f:
+            f.write("Last\tDelivery\tSecond\tRecipient\tPhone\tEmail\n")
+            for i in range(0,len(contacts)):
+                    f.write(contacts[i].addressList[0].city + " " + contacts[i].addressList[0].state + " " + contacts[i].addressList[0].zip + "\t")
+                    f.write(contacts[i].addressList[0].addressNumber + " " + contacts[i].addressList[0].address + "\t")
+                    f.write(contacts[i].addressList[0].second + "\t")
+                    f.write(contacts[i].fname + " " + contacts[i].lname + "\t")
+                    f.write(contacts[i].phoneNumberList[0] + "\t")
+                    f.write(contacts[i].emailList[0])
                     f.write("\n")
+        f.close
     
     #takes a fileName and uses the parser, contact, and address to add each line of the file to the addressbook.
     def addressBookImport(self, fileName, contactList):
         if os.path.exists(fileName):
             f = open(fileName, 'r')
-            data = utils.importParse(fileName)
+            data = utils.importParse(f)
             for element in data:
-                newContact = contact(element['recipient'])
-                newAddress = address(element['last'], element['delivery'], element['second'])
+                newContact = contact(element['Recipient'])
+                newAddress = address(element['Last'], element['Delivery'], element['Second'])
                 newContact.addAddress(newAddress)
                 self.addContact(newContact)
-                contactList.insert(0,element['recipient'])
+                contactList.insert(0,element['Recipient'])
         #todo: error reporting
         print "Path doesn't exist."
 
