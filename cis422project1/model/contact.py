@@ -12,8 +12,17 @@ import uuid
 import re
 
 class contact:
-    """docstring for contact"""
+
     def __init__(self, recipient):
+        """
+        Takes in recipient field, a name comprised of a first name and last name. Will set all other
+        fields initialized but empty:
+        addressList, a list of addresses
+        firstZip, a int used to sort based on zip of first address
+        emailList, a list of emails for contact
+        phoneNumberList, a list of phone numbers for contact
+        cid, a unique identifier used to distinguish between cases of two contacts with similar attributes (same name)
+        """
         # Last: City State Zip
         # Delivery: 1401 SW Main St.
         # Second: " " or APT 4
@@ -35,6 +44,11 @@ class contact:
         self.cid = uuid.uuid1()
 
     def addField(self, name, value):
+        """
+        Allows for a user to add their own attribute to a contact with a specified value. A user could add an "age"
+        attribute by calling contact.addField("age", 21). Only adds to this instance of the contact however and not
+        every instance
+        """
         # create local fget and fset functions
         get = lambda self: self.getField(name)
         set = lambda self, value: self.setField(name, value)
@@ -45,15 +59,28 @@ class contact:
         setattr(self, name, value)
 
     def setField(self, name, value):
+        """
+        Helper function used for addField() function. See function for details
+        """
         setattr(self, name, value)
 
     def getField(self, name):
+        """
+        Helper function used for addField() function. See function for details
+        """
         return getattr(self, name)
 
     def __eq__(self, other):
+        """
+        Equality function for contacts only compares first name and last name of contact so search
+        functionality by full name returns all contacts that have the same first name and last name
+        """
         return (self.fname == other.fname) and (self.lname == other.lname)
 
     def __str__(self):
+        """
+        Print function used for testing prints fname<space>lname<space>addressList
+        """
         name = self.fname + " " + self.lname
         tmp = ""
         for i in self.addressList:
@@ -109,15 +136,16 @@ class contact:
     def checkZip(self, zip):
         if(zip.isdigit()):
             return True
-        else:
-            tkMessageBox.showinfo("Alert", "Zip needs to be an Integer!", icon='warning')
+        else: return False
 
     def addAddress(self, addr):
         if (addr not in self.addressList):
-            if (self.addressList == []):
-                if(self.checkZip(addr.zip)):
-                    self.firstZip =  int(addr.zip)
-            self.addressList.append(addr)
+            if(self.checkZip(addr.zip)):
+                if (self.addressList == []):
+                    self.firstZip = int(addr.zip)
+                self.addressList.append(addr)
+            else:
+                tkMessageBox.showinfo("Alert", "Zip is not an Integer!", icon='warning')
         else:
             tkMessageBox.showinfo("Alert", "Address Already Added to This Contacts!", icon='warning')
 

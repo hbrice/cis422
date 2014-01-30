@@ -6,7 +6,6 @@ if not path in sys.path:
     sys.path.insert(1, path)
 del path
 
-from addressbooks import addressbooks
 from addressbook import addressbook
 from contact import contact
 from address import address
@@ -26,6 +25,7 @@ def main():
     testContact1.addEmail(testEmail1)
     testContact1.addEmail(testEmail2)
     testContact1.addPhoneNumber(testPhoneNumber1)
+    print(testContact1)
 
     testContact2 = contact("Mary Sue")
     testLast2 = "Venice CA 97979"
