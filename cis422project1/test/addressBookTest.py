@@ -14,7 +14,7 @@ def main():
     testAddressBook = addressbook()
 
     testContact1 = contact("John Doe")
-    testLast1 = "Alameda CA 94501"
+    testLast1 = "Alameda CA"
     testDelivery1 = "1401 SW Main St."
     testSecond1 = "Apt 4"
     testAddr1 = address(testLast1, testDelivery1, testSecond1)
@@ -25,9 +25,9 @@ def main():
     testContact1.addEmail(testEmail1)
     testContact1.addEmail(testEmail2)
     testContact1.addPhoneNumber(testPhoneNumber1)
-    print(testContact1)
+    #print(testContact1)
 
-    testContact2 = contact("Mary Sue")
+    '''testContact2 = contact("Mary Sue")
     testLast2 = "Venice CA 97979"
     testDelivery2 = "56 Trent St."
     testSecond2 = ""
@@ -139,7 +139,7 @@ def main():
     # testAddressBook.generalSearchContacts("SW2")
     # THIS WORKS!!
     #testAddressBook.removeContactByName("John Doe")
-    #print(testAddressBook)
+    #print(testAddressBook)'''
 
 if __name__ == '__main__':
     main()

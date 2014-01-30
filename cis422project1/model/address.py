@@ -1,5 +1,7 @@
 __author__ = 'lucasr'
 
+import tkMessageBox
+
 class address:
 
     def __init__(self, last, delivery, second):
@@ -66,11 +68,14 @@ class address:
         """
         output = []
         tmp = last.split(" ")
-        idx = 0
-        for i in tmp:
-            if(i.isdigit()):
-                output.insert(0,tmp[idx])
-                output.insert(0,tmp[idx-1])
-                output.insert(0,' '.join(tmp[0:idx-1]))
-            else: idx += 1
+        idx = len(tmp)-1
+        if (tmp[len(tmp)-1].isdigit()):
+            output.insert(0,tmp[idx])
+            output.insert(0,tmp[idx-1])
+            output.insert(0,' '.join(tmp[0:idx-1]))
+        else:
+            tkMessageBox.showinfo("Alert", "No Zip found in input!", icon='warning')
+            output.insert(0,"0")
+            output.insert(0,tmp[idx-1])
+            output.insert(0,' '.join(tmp[0:idx-1]))
         return output

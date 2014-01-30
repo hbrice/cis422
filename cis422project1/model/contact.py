@@ -79,7 +79,8 @@ class contact:
 
     def __str__(self):
         """
-        Print function used for testing prints fname<space>lname<space>addressList
+        Print function used for testing
+        prints fname<space>lname<newline>addressList<newline>emailList<newline>phoneNumberList<newLine>
         """
         name = self.fname + " " + self.lname
         tmp = ""
@@ -91,6 +92,10 @@ class contact:
         return output
 
     def __repr__(self):
+        """
+        Print function used for testing
+        prints fname<space>lname<newline>addressList<newline>emailList<newline>phoneNumberList<newLine>
+        """
         name = self.fname + " " + self.lname
         tmp = ""
         for i in self.addressList:
@@ -101,6 +106,10 @@ class contact:
         return output
 
     def __contains__(self, item):
+        """
+        Finds if item is a substring in any of the fields within a contact. Will check name, addresses, emails, phones
+        For example, can find all phone numbers with (510) area codes in this contact
+        """
         inName = ((item in self.fname) or (item in self.lname))
         inAddrList = False
         inEmailList = False
@@ -117,9 +126,14 @@ class contact:
         return (inName or inAddrList or inEmailList or inPhoneList)
 
     def checkName(self, name):
+        """
+        Makes sure that if name with three words are specified with the correct first name and last name.
+        An alert window will pop open an ask if the first name is a two word name or first word name
+        Example: Ann Marie Smith, first name could be both Ann Marie or Ann.
+        """
         if (len(name) > 2):
-            result = tkMessageBox.askquestion("Alert", "We noticed that you have entered in a three word name. "
-                                                       "Is the first word the first name?")
+            result = tkMessageBox.askquestion("Alert", "We noticed that you have entered in a three word name: " + name +
+                                                       ", Is the first word the first name?")
             if (result == 'yes'):
                 return True
             else:
@@ -128,17 +142,30 @@ class contact:
             return True
 
     def checkPhone(self, number):
+        """
+        Makes sure that the phone number has only 10 digits. Does not support phone numbers that have 1 before area code.
+        For example: 1 (510) 332 4565 IS NOT SUPPORTED!
+        """
         nums = ''.join(x for x in number if x.isdigit())
         if (len(nums) == 10):
             return True
         else: return False
 
     def checkZip(self, zip):
+        """
+        Makes sure that the zip is actually a digit and not some random string with chars and numbers
+        """
         if(zip.isdigit()):
             return True
         else: return False
 
     def addAddress(self, addr):
+        """
+        Adds address to addressList, before adding though makes sure that address is not already there, also
+        checks if the zip is correct and adds to firstZip if it is the first address added to the contact (firstZip is
+        used to sort all contacts by zip). Alert boxes pop up if the zip is not an integer or if address is already
+        added to the contact.
+        """
         if (addr not in self.addressList):
             if(self.checkZip(addr.zip)):
                 if (self.addressList == []):
@@ -150,6 +177,9 @@ class contact:
             tkMessageBox.showinfo("Alert", "Address Already Added to This Contacts!", icon='warning')
 
     def addEmail(self, email):
+        """
+        Adds email to contact, makes sure its in lower case and not added to contact already.
+        """
         if (email.lower() not in self.emailList):
             self.emailList.append(email)
         else:
