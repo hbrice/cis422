@@ -9,11 +9,12 @@ class address:
         self.last = last.lower()
         self.delivery = delivery.lower()
         self.second = second.lower()
+        parsedLast = self.parseLast(self.last)
         self.addressNumber = self.delivery.split(" ")[0]
         self.address = ' '.join(self.delivery.split(" ")[1:])
-        self.city = self.last.split(" ")[0]
-        self.state = self.last.split(" ")[1]
-        self.zip = self.last.split(" ")[2]
+        self.city = parsedLast[0]
+        self.state = parsedLast[1]
+        self.zip = parsedLast[2]
 
     def __eq__(self, other):
         return (self.last == other.last) and (self.delivery == other.delivery) \
@@ -34,3 +35,18 @@ class address:
     def __contains__(self, item):
         return (item.lower() in self.last) or (item.lower() in self.delivery) \
             or (item.lower() in self.second)
+
+    def parseLast(self, last):
+        # EXAMPLE:
+        # SAN DIEGO CA 97201
+        #  0    1    2    3
+        output = []
+        tmp = last.split(" ")
+        idx = 0
+        for i in tmp:
+            if(i.isdigit()):
+                output.append(tmp[idx])
+                output.append(tmp[idx-1])
+                output.append(' '.join(tmp[0:idx-1]))
+            else: idx += 1
+        return output
