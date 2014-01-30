@@ -2,7 +2,6 @@ import Tkinter as tk
 from tkFileDialog import askopenfilename
 from tkFileDialog import asksaveasfile
 from tkFileDialog import asksaveasfilename
-from model import addressbooks
 from model import addressbook
 from model import contact
 from model import address
