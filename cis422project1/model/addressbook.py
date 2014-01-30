@@ -17,11 +17,17 @@ from address import address
 from operator import attrgetter
 
 class addressbook:
-    """docstring for addressbook"""
+
     def __init__(self):
+        """
+        Initializes a list that will hold all contacts for an addressbook. Takes in no parameters.
+        """
         self.contacts = []
 
     def __str__(self):
+        """
+        Print function used to debug calls contact __str__ function put adds a seperator
+        """
         output = ""
         frame = "+++++++++++++++++++++++++++++++++++++\n"
         for i in self.contacts:
@@ -30,15 +36,21 @@ class addressbook:
         return output
 
     def addContact(self, contact):
+        """
+        Helper function to add to contacts list
+        """
         self.contacts.append(contact)
 
     def findContactByName(self, recipient):
+        """
+        Finds all contacts by recipient which includes both the first name and last name. If more than one contact
+        with the same recipient is found then both are added to the contactList to be returned. If no contacts are
+        found then alert window pops up and displays contact not found
+        """
         tmp = contact(recipient)
         indices = [i for i, val in enumerate(self.contacts) if val == tmp]
         contactList = []
         if (len(indices) > 1):
-            # This should be printed on the GUI
-            # print("More than one contact found:")
             for i in indices:
                 contactList.append(self.contacts[i])
             return contactList
@@ -49,6 +61,11 @@ class addressbook:
             tkMessageBox.showinfo("Alert", "Contact Not Found!", icon='warning')
 
     def generalSearchContacts(self, keyword):
+        """
+        Finds all contacts that have the string keyword parameter passed in. For example all contacts can be found
+        that contain an address with "st." If nothing is found, then alert window pops up and displays, "No matches
+        Found!"
+        """
         found = []
         for i in self.contacts:
             if keyword.lower() in i:
@@ -58,21 +75,32 @@ class addressbook:
         return found
 
     def removeContact(self, contact):
-        #self.contacts.remove(contact)
+        """
+        Finds all contacts with the same recipient but removes the contact only with the same cid.
+        """
         indices = [i for i, val in enumerate(self.contacts) if val == contact]
         for i in indices:
             if (self.contacts[i].cid == contact.cid):
                 self.contacts.pop(i)
 
     def mergeAddressBook(self, otherAddressBook):
+        """
+        Merges two address books together by going through the otherAddressBook and adding it's contacts to self.contacts list
+        """
         for i in otherAddressBook.contacts:
             self.addContact(i)
 
     def sortByLname(self):
+        """
+        Sort function that sorts by lname of contacts in address book and assigns it to the self.contacts list
+        """
         lnameSortList = sorted(self.contacts, key=attrgetter('lname'))
         self.contacts = lnameSortList
 
     def sortByZip(self):
+        """
+        Sort function that sorts by zip in address book and assigns it to the self.contacts list
+        """
         zipSortList = sorted(self.contacts, key=attrgetter('firstZip'))
         self.contacts = zipSortList
 
@@ -121,10 +149,11 @@ class addressbook:
                 self.addContact(newContact)
                 app.cmdUpdateListbox(self.contacts)
 
-    """Save: Function for saving an addressbooks instance.
-    The arguments are a file name, and an overwrite flag. If no flag is passed
-    the default is to not overwrite that file if it exists."""
     def save(self, fileName, overwrite = False):
+        """
+        Save: Function for saving an addressbooks instance. The arguments are a file name, and an overwrite flag.
+        If no flag is passed the default is to not overwrite that file if it exists.
+        """
         if not os.path.exists(fileName) or overwrite:
             output = open(fileName, 'w+')
             pickle.dump(self, output)
@@ -132,8 +161,10 @@ class addressbook:
         else:
             print("AddressBooks file already exists. Overwrite?")
 
-    """Load: sets the addressBooksList of self to the unpickled's list."""
     def load(self, fileName):
+        """
+        Load: sets the addressBooksList of self to the unpickled's list.
+        """
         if os.path.exists(fileName):
              input = open(fileName, 'rb')
              data = pickle.load(input)
