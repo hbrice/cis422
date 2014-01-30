@@ -167,7 +167,7 @@ class addressbook:
         """
         if os.path.exists(fileName):
              input = open(fileName, 'rb')
-             data = pickle.load(fileName)
+             data = pickle.load(input)
              if type(data) is self.addressBooksList:
              	self.addressBooksList = data.addressBooksList
 
