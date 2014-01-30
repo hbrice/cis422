@@ -19,9 +19,6 @@ class address:
         parsedLast = self.parseLast(self.last)
         self.addressNumber = self.delivery.split(" ")[0]
         self.address = ' '.join(self.delivery.split(" ")[1:])
-        print(parsedLast[0])
-        print(parsedLast[1])
-        print(parsedLast[2])
         self.city = parsedLast[0]
         self.state = parsedLast[1]
         self.zip = parsedLast[2]
@@ -39,7 +36,7 @@ class address:
         Print function used for testing prints delivery<space>second<space>last or
         prints delivery<space>last if no second is given
         """
-        if (self.second != " "):
+        if (self.second != ""):
             return self.delivery + " " + self.second + " " + self.last
         else:
             return self.delivery + " " + self.last
@@ -48,7 +45,7 @@ class address:
         """
         Same implementation as __str__ used for various cases when __str__ wouldn't print. Example: List of addresses
         """
-        if (self.second != " "):
+        if (self.second != ""):
             return self.delivery + " " + self.second + " " + self.last
         else:
             return self.delivery + " " + self.last

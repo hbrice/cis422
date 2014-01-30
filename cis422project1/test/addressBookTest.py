@@ -14,9 +14,9 @@ def main():
     testAddressBook = addressbook()
 
     testContact1 = contact("John Doe")
-    testLast1 = "San Diego CA"
+    testLast1 = "San Diego CA 94501"
     testDelivery1 = "1401 SW Main St."
-    testSecond1 = "Apt 4"
+    testSecond1 = ""
     testAddr1 = address(testLast1, testDelivery1, testSecond1)
     testEmail1 = "jdoe@gmail.com"
     testEmail2 = "doe@uoregon.edu"
@@ -25,6 +25,8 @@ def main():
     testContact1.addEmail(testEmail1)
     testContact1.addEmail(testEmail2)
     testContact1.addPhoneNumber(testPhoneNumber1)
+    print(testContact1)
+    print(testContact1.mailingFormat())
     #print(testContact1.city)
     #print(testContact1.state)
     #print(testContact1.zip)

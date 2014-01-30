@@ -91,6 +91,19 @@ class contact:
         output = name + "\n" + tmp + "\n" + emails + "\n" + phoneNumbers + "\n"
         return output
 
+    def mailingFormat(self):
+        # receiepent
+        # streetnumber name
+        # Apt4 city state zip
+        name = self.fname + " " + self.lname
+        street = self.addressList[0].addressNumber + " " + self.addressList[0].address
+        if (self.addressList[0].last != ""):
+            last = self.addressList[0].last + " " + self.addressList[0].city + " " + self.addressList[0].zip
+        else:
+            last = self.addressList[0].city + " " + self.addressList[0].zip
+        output = name + "\n" + street + "\n" + last + "\n"
+        return output
+
     def __repr__(self):
         """
         Print function used for testing
@@ -178,7 +191,8 @@ class contact:
 
     def addEmail(self, email):
         """
-        Adds email to contact, makes sure its in lower case and not added to contact already.
+        Adds email to contact, makes sure its in lower case and not added to contact already. If email is there already
+
         """
         if (email.lower() not in self.emailList):
             self.emailList.append(email)
