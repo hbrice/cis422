@@ -88,12 +88,21 @@ class addressbook:
         with open(fileName, 'w') as f:
             f.write("Last\tDelivery\tSecond\tRecipient\tPhone\tEmail\n")
             for i in range(0,len(contacts)):
-                    f.write(contacts[i].addressList[0].city + " " + contacts[i].addressList[0].state + " " + contacts[i].addressList[0].zip + "\t")
-                    f.write(contacts[i].addressList[0].addressNumber + " " + contacts[i].addressList[0].address + "\t")
-                    f.write(contacts[i].addressList[0].second + "\t")
+                    if len(contacts[i].addressList) > 0:
+                        f.write(contacts[i].addressList[0].city + " " + contacts[i].addressList[0].state + " " + contacts[i].addressList[0].zip + "\t")
+                        f.write(contacts[i].addressList[0].addressNumber + " " + contacts[i].addressList[0].address + "\t")
+                        f.write(contacts[i].addressList[0].second + "\t")
+                    else:
+                        f.write("\t\t\t")
                     f.write(contacts[i].fname + " " + contacts[i].lname + "\t")
-                    f.write(contacts[i].phoneNumberList[0] + "\t")
-                    f.write(contacts[i].emailList[0])
+                    if len(contacts[i].phoneNumberList) > 0:
+                        f.write(contacts[i].phoneNumberList[0] + "\t")
+                    else:
+                        f.write("\t")
+                    if len(contacts[i].emailList) > 0:
+                        f.write(contacts[i].emailList[0])
+                    else:
+                        f.write("\t")
                     f.write("\n")
         f.close
     
