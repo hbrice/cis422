@@ -186,6 +186,15 @@ class AddressBookFrame():
         self.entrySearch.delete(0,tk.END)
         self.cmdUpdateListbox(self.logic.contacts)
 
+    def cmdClearContact(self):
+        #clear all the entry boxes
+        self.entryAddressSecond.delete(0,tk.END)
+        self.entryAddressDelivery.delete(0,tk.END)
+        self.entryAddressLast.delete(0,tk.END)
+        self.entryEmail.delete(0,tk.END)
+        self.entryPhone.delete(0,tk.END)
+        self.entryName.delete(0,tk.END)
+
     def cmdSortName(self):
         print "sort by last name"
         self.logic.sortByLname()
@@ -208,8 +217,6 @@ class AddressBookFrame():
             tmpName = self.contactPairs[len(self.contactPairs)].fname + " " + self.contactPairs[len(self.contactPairs)].lname
             self.contactsList.insert(tk.END,tmpName)
 
-
-
     def initUI(self):
         #############################
         #Contact List/contactFrame
@@ -228,13 +235,9 @@ class AddressBookFrame():
 
         self.contactPairs = {}
 
-
         #add scrollbar to contactsList
         #contactsList.config(yscrollcommand=sbContactsList.set)
         #sbContactsList.config(command=contactsList.yview())
-
-        #contactsList.insert(tk.END,"John Smith")
-        #contactsList.insert(tk.END,"Jane Smith")
 
         #############################
         #Entry/entryFrame
@@ -300,6 +303,8 @@ class AddressBookFrame():
         self.btnSortZIP = tk.Button(self.buttonFrame, text="Sort, ZIP", command=self.cmdSortZIP)
         self.btnSortZIP.grid(row=2,column=3, sticky=tk.W+tk.E)
 
+        self.btnClearContact = tk.Button(self.buttonFrame, text="Clear Fields", command=self.cmdClearContact)
+        self.btnClearContact.grid(row=1,column=2, sticky=tk.W+tk.E)
 
         #Search
         self.entrySearch = tk.Entry(self.buttonFrame, width = 25)
