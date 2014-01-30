@@ -111,7 +111,6 @@ class addressbook:
             f = open(fileName, 'r')
             data = utils.importParse(f)
             for element in data:
-                print element
                 newContact = contact(element['Recipient'])
                 newAddress = address(element['Last'], element['Delivery'], element['Second'])
                 newContact.addAddress(newAddress)
@@ -121,8 +120,6 @@ class addressbook:
                     newContact.addEmail(element['Email'])
                 self.addContact(newContact)
                 app.cmdUpdateListbox(self.contacts)
-        #todo: error reporting
-        print "Path doesn't exist."
 
     """Save: Function for saving an addressbooks instance.
     The arguments are a file name, and an overwrite flag. If no flag is passed
